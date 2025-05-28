@@ -21,3 +21,38 @@
 }
 
 /* Icono hamburguesa y botón de cierre blancos */
+
+.menuLinks {
+  justify-content: flex-end;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .menuLinks {
+    justify-content: center;
+    width: 100%;
+    gap: 0.7rem;
+  }
+  .navlink {
+    font-size: 0.8rem;
+    margin-right: 0.2rem;
+    padding: 0.5rem 0.5rem;
+  }
+}
+
+.reserveBtn {
+  background: rgb(204,119,65);
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.35rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.reserveBtn:hover {
+  background: #b05b30;
+  color: #fff;
+}
