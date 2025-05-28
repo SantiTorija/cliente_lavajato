@@ -46,7 +46,7 @@ option{
 
 .back-button{
   background-color: rgb(219, 206, 198) !important;
-  color:rgb(0, 0, 0) !important;
+  color:rgba(0, 0, 0, 0.167) !important;
   border: 1px solid rgb(0, 0, 0) !important;
   border-radius: 3rem;
   padding: .3rem 1rem;
@@ -185,10 +185,10 @@ color: white;
 }
 
 .back-button {
-  background-color: rgb(232, 232, 232) !important;
-  color: rgb(0, 0, 0) !important;
-  border: 1px solid rgba(0, 0, 0, 0.082) !important;
-   border-radius: 2rem !important;
+  background-color: #e0e0e0 !important;
+  color: #222 !important;
+  border: 1.5px solid #bdbdbd !important;
+  border-radius: 2rem !important;
 }
 
 .action-button, .back-button {
@@ -203,8 +203,7 @@ color: white;
 }
 
 @media (max-width: 576px) {
-.action-button, .back-button {
-  
+.action-button, .back-button {  
     min-width: 40%;
     font-size: 0.95rem !important;
     
@@ -256,14 +255,7 @@ label, .form-label {
   color: #fff !important;
 }
 
-.btn-primary {
-  background-color: rgb(204,119,65) !important;
-  border-color: rgb(204,119,65) !important;
-  color: #fff !important;
-  font-weight: 600;
-  border-radius: 2rem !important;
-  transition: background 0.2s, color 0.2s;
-}
+
 
 .btn-primary:hover, .btn-primary:focus {
   background-color: #b05b30 !important;

@@ -79,7 +79,7 @@ export default function MisReservas() {
             onClick={handleBuscar}
             disabled={loading}
           >
-            {loading ? "Buscando..." : "Buscar"}
+            Buscar
           </Button>
         </InputGroup>
         {emailError && (
@@ -93,7 +93,6 @@ export default function MisReservas() {
             onSelect={(k) => setKey(k)}
             className={styles.navPills + " mb-3"}
             fill
-            variant="pills"
           >
             <Tab eventKey="Active" title="Activas">
               <div className="text-white">

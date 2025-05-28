@@ -8,7 +8,6 @@
   background: transparent !important;
   color: #fff !important;
   border-radius: 2rem !important;
-  margin: 0 0.25rem;
   font-weight: 600;
   transition: background 0.2s, color 0.2s;
 }
@@ -17,12 +16,12 @@
 .navPills :global(.show > .nav-link) {
   background: rgb(204,119,65) !important;
   color: #fff !important;
+  border-radius: 2rem !important;
+  font-weight: 600;
+  box-shadow: none !important;
 }
 
-.navPills :global(.nav-link:hover) {
-  background: #333 !important;
-  color: #fff !important;
-}
+
 
 .btnBuscar {
   background-color: rgb(204,119,65) !important;
@@ -33,7 +32,7 @@
   transition: background 0.2s, color 0.2s;
 }
 
-.btnBuscar:hover, .btnBuscar:focus {
+.btnBuscar:hover  {
   background-color: #b05b30 !important;
   border-color: #b05b30 !important;
   color: #fff !important;

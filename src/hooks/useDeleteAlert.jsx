@@ -23,9 +23,9 @@ const useDeleteAlert = () => {
         // Lógica para eliminar la orden
 
         const responseDelete = await axios.delete(
-          `${import.meta.env.VITE_API_URL}/order/${orderId}/${orderDate}/
-              ${orderSlot}
-            }`
+          `${
+            import.meta.env.VITE_API_URL
+          }/order/${orderId}/${orderDate}/${orderSlot}`
         );
 
         console.log(responseDelete);
