@@ -16,7 +16,9 @@ function ThankYou() {
     dispatch(emptyCart());
     dispatch(removeClient());
     dispatch(emptyOrderToEdit());
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 150);
   };
 
   return (
