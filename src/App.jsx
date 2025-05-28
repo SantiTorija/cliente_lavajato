@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import MyCalendar from "./pages/Calendar";
 import Confirmation from "./pages/Confirmation";
 import ClientDataForm from "./pages/ClientDataForm";
