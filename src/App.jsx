@@ -10,7 +10,7 @@ import BookingFlow from "./pages/BookingFlow";
 import Servicios from "./pages/Servicios";
 import Contacto from "./pages/Contacto";
 import MisReservas from "./pages/MisReservas";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/mis-reservas" element={<MisReservas />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );
