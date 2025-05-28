@@ -44,7 +44,19 @@
 .contactButton:hover {
   background: #1ebe57;
   color: #fff !important;
-} 
+}
+
+.mainButton {
+  background: rgb(204,119,65) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.mainButton:hover {
+  background: #b05b30 !important;
+  color: #fff !important;
+}
 
 .heroContainer {
   display: flex;
@@ -79,4 +91,35 @@
   font-weight: 400;
   position: relative;
   z-index: 2;
+}
+
+.contactInfo {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-size: 1.1em;
+}
+
+.contactText {
+  font-weight: 600;
+  font-size: 1em;
+  color: #fff;
+}
+
+@media (max-width: 576px) {
+  .contactInfo {
+    font-size: 1em;
+  }
+  .contactText {
+    font-size: 0.9rem;
+  }
+  .contactButton,
+  .mainButton {
+    font-size: 0.8rem !important;
+    width: auto !important;
+    min-width: unset !important;
+    max-width: 100%;
+    padding: 0.5rem 0.3rem !important;
+    text-align: center;
+  }
 }

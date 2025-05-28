@@ -2,6 +2,7 @@ import NavbarComponent from "../components/Navbar";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
 import styles from "./contacto.module.css";
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 export default function Contacto() {
   return (
@@ -14,29 +15,65 @@ export default function Contacto() {
       </section>
       <div className={styles.wrapper}>
         <div className={styles.content}>
-          <p>
-            <strong>WhatsApp:</strong> 095 422 422
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "1.5rem",
+            }}
+          >
+            <span className={styles.contactInfo}>
+              <FaWhatsapp
+                style={{
+                  color: "#fff",
+                  fontSize: "2.2em",
+                  verticalAlign: "middle",
+                }}
+              />
+              <span className={styles.contactText}>095 422 422</span>
+            </span>
             <a
               href="https://wa.me/59895422422"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.contactButton}
+              className={styles.contactButton + " " + styles.mainButton}
+              style={{ minWidth: 130, textAlign: "center" }}
             >
               Contactar
             </a>
-          </p>
-          <p>
-            <strong>Email:</strong>{" "}
-            <a href="mailto:lavajato@gmail.com" className={styles.emailLink}>
-              lavajato@gmail.com
-            </a>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "1.5rem",
+            }}
+          >
+            <span className={styles.contactInfo}>
+              <FaEnvelope
+                style={{
+                  color: "#fff",
+                  fontSize: "2.1em",
+                  verticalAlign: "middle",
+                }}
+              />
+              <a
+                href="mailto:lavajato@gmail.com"
+                className={styles.emailLink + " " + styles.contactText}
+              >
+                lavajato@gmail.com
+              </a>
+            </span>
             <a
               href="mailto:lavajato@gmail.com"
-              className={styles.contactButton}
+              className={styles.contactButton + " " + styles.mainButton}
+              style={{ minWidth: 130, textAlign: "center" }}
             >
               Contactar
             </a>
-          </p>
+          </div>
           <div className={styles.mapContainer}>
             <iframe
               title="Mapa Lavajato"

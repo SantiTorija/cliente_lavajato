@@ -1,8 +1,7 @@
-import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import NavbarComponent from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "./servicios.module.css";
-import { Container, Button, Row, Col } from "react-bootstrap";
 import ceramico from "../assets/images/ceramico.jpg";
 import neumaticos from "../assets/images/neumaticos.jpg";
 import baterias from "../assets/images/bateria.png";
@@ -43,9 +42,15 @@ export default function Servicios() {
                   servicio. Nos aseguramos de utilizar materiales de primera
                   calidad para garantizar todos nuestro trabajos.
                 </p>
-                <button className="action-button w-50 w-md-25">
+                <a
+                  href="https://wa.me/59895422422"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`action-button ${styles.contactarBtn}`}
+                  style={{ textAlign: "center" }}
+                >
                   Contactar
-                </button>
+                </a>
               </Col>
               <Col className="d-none d-md-block" md={6}>
                 <img className="w-100" src={ceramico} alt="Cerámico" />
@@ -74,7 +79,15 @@ export default function Servicios() {
                   Bridgestone y comercializamos todas las marcas. Cotiza con tu
                   medida ahora.
                 </p>
-                <button className="action-button w-25">Contactar</button>
+                <a
+                  href="https://wa.me/59895422422"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`action-button ${styles.contactarBtn}`}
+                  style={{ textAlign: "center" }}
+                >
+                  Contactar
+                </a>
               </Col>
             </Row>
           </Container>
@@ -98,9 +111,15 @@ export default function Servicios() {
                   rápidamente nos va a informar de su estado. Con la compra de
                   su batería la colocación es gratis. Cotiza tu batería aquí
                 </p>
-                <button className="action-button w-50 w-md-25">
+                <a
+                  href="https://wa.me/59895422422"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`action-button ${styles.contactarBtn}`}
+                  style={{ textAlign: "center" }}
+                >
                   Contactar
-                </button>
+                </a>
               </Col>
               <Col className="d-none d-md-block" md={6}>
                 <img
@@ -133,7 +152,15 @@ export default function Servicios() {
                   un accidente o te chocaron no dudes en consultarnos. También
                   realizamos trabajos particulares. Cotiza tu reparación aqui
                 </p>
-                <button className="action-button w-50">Contactar</button>
+                <a
+                  href="https://wa.me/59895422422"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`action-button ${styles.contactarBtn}`}
+                  style={{ textAlign: "center" }}
+                >
+                  Contactar
+                </a>
               </Col>
             </Row>
           </Container>
