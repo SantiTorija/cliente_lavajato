@@ -3,7 +3,7 @@ import NavbarComponent from "../components/Navbar";
 import styles from "./home.module.css";
 import { Container, Row } from "react-bootstrap";
 import CenteredModal from "../components/ExistingReserveModal.jsx";
-import EmailModal from "../components/emailModal.jsx";
+import EmailModal from "../components/EmailModal.jsx";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
 import { Link } from "react-router-dom";
