@@ -1,0 +1,64 @@
+.actionButton{
+    background-color: rgb(204,119,65) !important;
+  color:white !important;
+  border: 1px solid rgb(34,162,171) !important;
+  width: 9rem;
+}
+
+.backButton{
+    background-color: rgb(123, 123, 123) !important;
+  color:white !important;
+  border: 1px solid rgb(34,162,171) !important;
+  width: 9rem;
+}
+
+.warning{
+  border: 1px solid rgba(255, 0, 0, 0.431);
+  border-radius: 10px;
+  padding: .5rem;
+  text-align: justify;
+  font-size: .8rem;
+}
+
+.card{   
+  
+    color: rgb(0, 0, 0);
+    width: 50%;
+    text-align: left;
+    padding: 1rem !important;
+    
+}
+
+/* Dispositivos pequeños (teléfonos en modo retrato y dispositivos menores a 576px) */
+@media (max-width: 575.98px) {
+  .card{  
+    width: 100%;    
+}
+.font{
+  font-size: .9rem
+}
+}
+
+/* Dispositivos medianos (tabletas y dispositivos con ancho entre 576px y 768px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .card{  
+    width: 100%;    
+}
+}
+
+/* Dispositivos grandes (escritorios y dispositivos con ancho entre 768px y 992px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .card{  
+    width: 100%;    
+}
+}
+
+/* Dispositivos extra grandes (pantallas anchas con ancho entre 992px y 1200px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+}
+
+/* Dispositivos extra extra grandes (pantallas muy anchas con ancho mayor a 1200px) */
+@media (min-width: 1200px) {
+  
+}

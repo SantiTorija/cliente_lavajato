@@ -1,0 +1,272 @@
+*{
+  box-sizing: border-box;
+}
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+
+select{
+  padding: .5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.189);
+  border-radius: 5px;
+}
+option{
+  padding: .5rem 1rem;
+}
+.card {
+  padding: 2em;
+}
+
+
+
+.back-button{
+  background-color: rgb(219, 206, 198) !important;
+  color:rgb(0, 0, 0) !important;
+  border: 1px solid rgb(0, 0, 0) !important;
+  border-radius: 3rem;
+  padding: .3rem 1rem;
+}
+
+.read-the-docs {
+  color: #888;
+}
+.card-body{
+  padding: 0 !important;
+}
+.card{
+  padding: 0 !important;
+}
+
+.react-calendar{
+ border: none !important;
+ padding: none !important;
+ margin-top: -2rem;
+}
+.react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 5px !important; /* separación entre días */
+}
+
+.react-calendar__tile {
+  border-radius: 5px; 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  font-size: 1rem !important;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Días disponibles */
+.available-day {
+  background-color: #cee8d4 !important;
+  
+  color: #155724 !important;
+}
+
+/* Hover para días disponibles */
+.available-day:hover {
+  background-color: #c3e6cb;
+}
+
+/* Días no disponibles */
+.unavailable-day {
+  background-color: #f8f9fa;
+  color: #994c4c;
+  cursor: not-allowed;
+}
+
+/* Día seleccionado y disponible */
+.selected-day {
+  background-color: #28a745 !important;
+  color: #fff !important;
+}
+
+/* Día seleccionado pero no disponible */
+.selected-unavailable-day {
+  background-color: #6c757d !important;
+  color: #fff !important;
+}
+
+.react-calendar__tile:disabled {
+  background-color: #e9afaf !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+}
+
+/* Slots container styles */
+
+
+.content-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye los elementos con espacio entre ellos */
+  align-items: flex-start;
+   /* Alinea los elementos al inicio */
+}
+
+.content-wrapper > div {
+  flex: 1; /* Hace que los divs ocupen el espacio disponible */
+  margin: 0 10px; /* Espacio entre los divs */
+}
+
+
+.available-slot {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.available-slot:hover {
+  background: #218838;
+}
+
+.form-check-input:checked{
+  background-color:  rgb(204,119,65);
+  border-color: white !important;
+}
+
+.form-check-input:focus{
+  border-color: white !important;
+  box-shadow: none !important;
+}
+
+.navbar .navbar-toggler {
+color: white;
+}
+
+
+
+.offcanvas .btn-close {
+  filter: invert(1);
+  background-color: transparent;
+  opacity: 1;
+}
+
+.offcanvas-header {
+  border-bottom: none;
+}
+
+
+.action-button {
+  background-color: rgb(204,119,65) !important;
+  color: white !important;
+  border: 1px solid rgb(34,162,171) !important;
+   border-radius: 2rem !important;
+}
+
+.back-button {
+  background-color: rgb(232, 232, 232) !important;
+  color: rgb(0, 0, 0) !important;
+  border: 1px solid rgba(0, 0, 0, 0.082) !important;
+   border-radius: 2rem !important;
+}
+
+.action-button, .back-button {
+ 
+  padding: 0.5rem .8rem !important;
+  font-size: 1rem !important;
+  min-width: 120px;
+  max-width: 100%;
+  font-weight: 600;
+  box-sizing: border-box;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+@media (max-width: 576px) {
+.action-button, .back-button {
+  
+    min-width: 40%;
+    font-size: 0.95rem !important;
+    
+  }
+}
+
+/* Modales oscuros globales */
+.modal-content {
+  background-color: #111 !important;
+  color: #fff !important;
+  border: 1.5px solid #444 !important;
+  box-shadow: 0 8px 32px 0 rgba(61, 61, 61, 0.7), 0 1.5px 4px 0 rgba(136, 136, 136, 0.25);
+}
+
+.modal-header, .modal-footer {
+  background-color: #111 !important;
+  color: #fff !important;
+  border: none;
+}
+
+.modal-title, .modal-body, .modal-footer, .modal-header {
+  color: #fff !important;
+}
+
+.btn-close {
+  filter: invert(1);
+}
+
+label, .form-label {
+  font-weight: bold !important;
+}
+
+.nav-pills .nav-link {
+  background: transparent !important;
+  color: #fff !important;
+  border-radius: 2rem !important;
+  margin: 0 0.25rem;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background: rgb(204,119,65) !important;
+  color: #fff !important;
+}
+
+.nav-pills .nav-link:hover {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+.btn-primary {
+  background-color: rgb(204,119,65) !important;
+  border-color: rgb(204,119,65) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 2rem !important;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #b05b30 !important;
+  border-color: #b05b30 !important;
+  color: #fff !important;
+}

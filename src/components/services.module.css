@@ -1,0 +1,23 @@
+.moreInfoButton {
+    background: none;
+    border: none;
+    color: rgb(34,162,171);
+    font-weight: 600;
+    cursor: pointer;
+
+    padding: 0;
+  }
+  
+  .moreInfoButton:hover {
+    color: #fff;
+  }
+  
+
+  .disclaimerFont{
+    border: 1px solid rgb(171, 34, 34);
+    padding: 1rem;
+    text-align: justify;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }

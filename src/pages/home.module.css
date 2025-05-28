@@ -1,0 +1,67 @@
+.container{
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1rem 0rem 1rem;    
+    height: 80vh !important;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(https://images.pexels.com/photos/7530997/pexels-photo-7530997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+          background-position: center;
+          background-size: cover;
+    /* Imagen de fondo por defecto (desktop) se define inline en el componente */
+}
+
+@media (max-width: 768px) {
+  .container {
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/15469368/pexels-photo-15469368/free-photo-of-close-up-of-an-audi-a5-headlight-and-hood-covered-in-foam-at-a-car-wash.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+.title{
+    font-size: 2rem;  
+    color: rgb(255, 255, 255);
+}
+
+.subtitle{
+    font-size: 1.2rem;  
+    font-weight: 400;
+    color: rgb(255, 255, 255);
+}
+
+.font{
+font-size: 1.1rem;
+font-weight: 600;
+color: white;
+
+}
+
+.buttonLink{
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+font-weight: 700;
+    border: none;
+    text-decoration: underline;
+}
+
+.alreadyReserveLink {
+  color: white;
+  font-weight: 700;
+  font-size: .8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.alreadyReserveLink:hover {
+  color: #cc7741;
+  text-decoration: none;
+}
+
+
+
+

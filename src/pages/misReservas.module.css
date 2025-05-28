@@ -1,0 +1,76 @@
+.tabsContainer {
+  background: #222;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.navPills :global(.nav-link) {
+  background: transparent !important;
+  color: #fff !important;
+  border-radius: 2rem !important;
+  margin: 0 0.25rem;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navPills :global(.nav-link.active),
+.navPills :global(.show > .nav-link) {
+  background: rgb(204,119,65) !important;
+  color: #fff !important;
+}
+
+.navPills :global(.nav-link:hover) {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+.btnBuscar {
+  background-color: rgb(204,119,65) !important;
+  border-color: rgb(204,119,65) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 2rem !important;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btnBuscar:hover, .btnBuscar:focus {
+  background-color: #b05b30 !important;
+  border-color: #b05b30 !important;
+  color: #fff !important;
+}
+
+.inputGroupNoGap .form-control {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.inputGroupNoGap .btnBuscar {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  margin-left: 0 !important;
+}
+
+.navPills {
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-wrap: nowrap !important;
+}
+
+@media (max-width: 576px) {
+  .navPills :global(.nav) {
+    flex-wrap: nowrap !important;
+    width: 100%;
+    display: flex;
+  }
+  .navPills :global(.nav-link) {
+    min-width: 0;
+    flex: 1 1 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.font {
+  color: #222;
+  font-size: 0.95rem;
+} 

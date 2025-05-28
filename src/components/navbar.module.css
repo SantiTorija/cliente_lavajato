@@ -1,0 +1,23 @@
+.navbar{   
+    width: 100%;
+    padding: 1.5rem;
+    background-color: black;
+    border-bottom: 1px solid black;
+}
+
+.navlink {
+  color: white;
+  font-weight: 700;
+  margin-right: 1.5rem; 
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.navlink:hover {
+  color: #cc7741;
+  text-decoration: none;
+}
+
+/* Icono hamburguesa y botón de cierre blancos */

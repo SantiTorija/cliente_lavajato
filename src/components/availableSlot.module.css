@@ -1,0 +1,44 @@
+.moreInfoButton{
+    background-color: transparent;
+    padding: 0;
+    color: blue;
+    font-size: .9rem;
+    
+
+}
+
+
+.slotsContainer {
+    display: grid;
+  
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100;
+  }
+  
+  .slotItem {
+    padding: .5rem 1rem ;
+    border: .5px solid #71e38c ;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    color: #595959;
+    background-color: #cee8d4 ;
+    font-weight: 600;
+    font-size: .8rem;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  
+  .active {
+    background-color: #1d8a37 ;
+    color: #ffffff;
+  }
+  
+  @media (min-width: 768px) {
+    .slotsContainer {
+      grid-template-columns: 1fr;
+    }
+  }
+  
