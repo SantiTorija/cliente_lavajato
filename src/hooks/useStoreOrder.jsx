@@ -29,7 +29,7 @@ const useStoreOrder = (date, slot) => {
       return response;
     } catch (err) {
       setError(err);
-      console.error("Error fetching availability:", err);
+      console.error("Error at storeOrder:", err);
     } finally {
       setLoading(false);
     }

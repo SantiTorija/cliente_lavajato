@@ -32,6 +32,8 @@ const ClientDataForm = () => {
     const selectedCarType = carTypes.find(
       (type) => type.id === parseInt(carTypeId)
     );
+    console.log(selectedCarType);
+    console.log(carTypeId);
     if (selectedCarType) {
       setCarType(selectedCarType.name);
       setCarTypeId(selectedCarType.id);
