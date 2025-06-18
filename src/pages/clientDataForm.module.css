@@ -2,6 +2,7 @@
     background-color: #ffffff;
     border-radius: 20px;
     color: rgb(0, 0, 0);
+    width: 100%;
 }
 
 /* Dispositivos pequeños (teléfonos en modo retrato y dispositivos menores a 576px) */
@@ -16,21 +17,15 @@
   
   /* Dispositivos grandes (escritorios y dispositivos con ancho entre 768px y 992px) */
   @media (min-width: 768px) and (max-width: 991.98px) {
-    .form{
-        width: 40%;
-    }
+    
   }
   
   /* Dispositivos extra grandes (pantallas anchas con ancho entre 992px y 1200px) */
   @media (min-width: 992px) and (max-width: 1199.98px) {
-    .form{
-        width: 35%;
-    }
+  
   }
   
   /* Dispositivos extra extra grandes (pantallas muy anchas con ancho mayor a 1200px) */
   @media (min-width: 1200px) {
-    .form{
-        width: 30%;
-    }
+    
   }

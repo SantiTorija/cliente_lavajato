@@ -38,9 +38,8 @@ function Confirmation() {
         lastname: lastname,
         phone: email,
         cart: cart,
-        total: cart.total,
         service: cart.service,
-        clientId: id,
+        ClientId: id,
       });
 
       dispatch(emptyCart());
@@ -60,7 +59,6 @@ function Confirmation() {
           lastname: lastname,
           phone: email,
           cart: cart,
-          total: cart.total,
           service: cart.service,
         },
         orders[0]
@@ -124,7 +122,6 @@ function Confirmation() {
         </div>
       </Container>
       <WhatsappButton />
-      <Footer />
     </>
   );
 }

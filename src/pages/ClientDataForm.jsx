@@ -7,6 +7,7 @@ import NavbarComponent from "../components/Navbar";
 import { Container, Row, Form, Button } from "react-bootstrap";
 import styles from "./clientDataForm.module.css";
 import useStoreClient from "../hooks/useStoreClient";
+import useFetchCarTypes from "../hooks/useFetchCarTypes";
 import Footer from "../components/Footer";
 import { emptyCart } from "../redux/cartSlice";
 import { removeClient } from "../redux/clientSlice";
@@ -17,13 +18,25 @@ const ClientDataForm = () => {
   const navigate = useNavigate();
   const { email } = useParams();
   const { storeClient } = useStoreClient();
+  const { carTypes, loading, error } = useFetchCarTypes();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [marca, setMarca] = useState("");
   const [modelo, setModelo] = useState("");
   const [countryCode, setCountryCode] = useState("+598");
   const [localPhone, setLocalPhone] = useState("");
-  const [carType, setCarType] = useState(null);
+  const [carType, setCarType] = useState("");
+  const [carTypeId, setCarTypeId] = useState(null);
+
+  const handleAddCarType = (carTypeId) => {
+    const selectedCarType = carTypes.find(
+      (type) => type.id === parseInt(carTypeId)
+    );
+    if (selectedCarType) {
+      setCarType(selectedCarType.name);
+      setCarTypeId(selectedCarType.id);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +57,7 @@ const ClientDataForm = () => {
         email,
         phone: fullPhone,
         car: { modelo, marca, carType },
+        carTypeId: carTypeId,
       })
     );
     dispatch(next());
@@ -128,18 +142,11 @@ const ClientDataForm = () => {
 
           <Form.Group className="mt-2" controlId="formTipoAuto">
             <Form.Label>Tipo de auto</Form.Label>
-            <Form.Select
-              value={carType}
-              onChange={(e) => setCarType(e.target.value)}
-            >
+            <Form.Select onChange={(e) => handleAddCarType(e.target.value)}>
               <option value="">Selecciona una opción</option>
-              {[
-                "Auto - furgón chico",
-                "Pick Up pequeñas - SUV",
-                "Pick up - SUV 7 plazas",
-              ].map((type) => (
-                <option key={type} value={type}>
-                  {type}
+              {carTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.name}
                 </option>
               ))}
             </Form.Select>
@@ -164,7 +171,6 @@ const ClientDataForm = () => {
           </div>
         </Form>
       </Container>
-      <Footer />
     </>
   );
 };

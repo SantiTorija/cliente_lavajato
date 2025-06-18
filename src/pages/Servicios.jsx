@@ -7,6 +7,31 @@ import neumaticos from "../assets/images/neumaticos.jpg";
 import baterias from "../assets/images/bateria.png";
 import chapa from "../assets/images/blackcar.png";
 import WhatsappButton from "../components/WhatsappButton";
+import BrandLogos from "../components/BrandLogos";
+
+// Array de logos de ejemplo
+const brandLogos = [
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Repsol_logo.svg/2560px-Repsol_logo.svg.png",
+    alt: "Repsol",
+  },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStX4VdEbAvRph8wXbll7vQV0GwiriWfHroxg&s",
+    alt: "millard",
+  },
+  {
+    src: "https://www.shutterstock.com/image-vector/bridgestone-logo-sign-icon-emblem-600nw-2286811601.jpg",
+    alt: "Bridgestone",
+  },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnnS3zC8qV2UJnqMY1sz2S-9EcHJlU0lVirQ&s",
+    alt: "Winda",
+  },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNHbXRxyYG8jEADYMqrCqndW4irkx7vUP6UA&s",
+    alt: "Continental",
+  },
+];
 
 export default function Servicios() {
   return (
@@ -19,6 +44,9 @@ export default function Servicios() {
             <h1 className={styles.heroTitle}>Servicios</h1>
           </div>
         </section>
+
+        <BrandLogos logos={brandLogos} />
+
         <section>
           <Container fluid>
             <Row className="align-items-center">
@@ -88,6 +116,7 @@ export default function Servicios() {
                 >
                   Contactar
                 </a>
+                <BrandLogos logos={brandLogos} />
               </Col>
             </Row>
           </Container>

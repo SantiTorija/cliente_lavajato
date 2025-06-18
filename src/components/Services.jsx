@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addService, emptyDateTime } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { prev, next } from "../redux/reserveStepSlice";
+import useFetchServices from "../hooks/useFetchServices";
 
 const Services = () => {
   const [service, setService] = useState("");
@@ -16,13 +17,14 @@ const Services = () => {
   const [modalShowEncerado, setModalShowEncerado] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { carType } = useSelector((state) => state.client);
+  const { carType, carTypeId } = useSelector((state) => state.client);
   const { prices } = useSelector((state) => state.services);
+  const { services, loading, error } = useFetchServices(parseInt(carTypeId));
 
   useEffect(() => {
     if (!carType || !prices) return;
 
-    if (carType === "Auto - furgón chico") {
+    if (carType === "Auto - Furgón chico") {
       setLavadoCompletoPrecio(prices.chico.lavado);
       setLavadoYEnceradoPrecio(prices.chico.lavadoYEncerado);
     } else if (carType === "Pick Up pequeñas - SUV") {
