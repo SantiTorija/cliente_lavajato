@@ -18,6 +18,7 @@ const useStoreOrder = (date, slot) => {
           firstname: order.firstname,
           lastname: order.lastname,
           phone: order.phone,
+          email: order.email,
           cart: order.cart,
           clientId: order.clientId,
         },

@@ -36,7 +36,7 @@ function Confirmation() {
       await storeOrder({
         firstname: firstname,
         lastname: lastname,
-        phone: email,
+        email: email,
         cart: cart,
         service: cart.service,
         clientId: id,
