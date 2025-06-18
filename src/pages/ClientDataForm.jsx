@@ -29,9 +29,7 @@ const ClientDataForm = () => {
   const [carTypeId, setCarTypeId] = useState(null);
 
   const handleAddCarType = (carTypeId) => {
-    const selectedCarType = carTypes.find(
-      (type) => type.id === parseInt(carTypeId)
-    );
+    const selectedCarType = carTypes.find((type) => type.id === carTypeId);
     if (selectedCarType) {
       setCarType(selectedCarType.name);
       setCarTypeId(selectedCarType.id);
