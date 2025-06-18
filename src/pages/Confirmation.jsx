@@ -39,7 +39,7 @@ function Confirmation() {
         phone: email,
         cart: cart,
         service: cart.service,
-        ClientId: id,
+        clientId: id,
       });
 
       dispatch(emptyCart());
