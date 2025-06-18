@@ -10,7 +10,9 @@ const useStoreOrder = (date, slot) => {
     try {
       const response = await axios({
         method: "POST",
-        url: `${import.meta.env.VITE_API_URL}/order/${date}/${slot}`,
+        url: `${import.meta.env.VITE_API_URL}/order/${date}/${slot}/${
+          order.email
+        }`,
         headers: {
           "Content-Type": "application/json",
         },
