@@ -8,15 +8,18 @@ const BrandLogos = ({
   logos = [],
   autoplaySpeed = 2500,
   slidesToShow = { desktop: 5, tablet: 3, mobile: 2 },
+  id,
 }) => {
+  const isNeumaticos = id === "logos-neumaticos";
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: isNeumaticos ? false : true,
     slidesToShow: slidesToShow.desktop,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: isNeumaticos ? false : true,
     autoplaySpeed: autoplaySpeed,
     pauseOnHover: true,
+    arrows: isNeumaticos ? false : true,
     responsive: [
       {
         breakpoint: 1024,
@@ -34,7 +37,7 @@ const BrandLogos = ({
   };
 
   return (
-    <div className={styles.brandLogosFade}>
+    <div className={styles.brandLogosFade} id={id}>
       <div className={styles.fadeLeft}></div>
       <div className={styles.fadeRight}></div>
       <div className={styles.brandLogosContainer}>

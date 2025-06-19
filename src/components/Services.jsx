@@ -1,6 +1,6 @@
 import styles from "./services.module.css";
 import { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Toast } from "react-bootstrap";
 import MoreInfoModal from "./MoreInfoModal";
 import { useSelector, useDispatch } from "react-redux";
 import { addService, emptyDateTime } from "../redux/cartSlice";
@@ -15,6 +15,8 @@ const Services = () => {
   const [lavadoYEnceradoPrecio, setLavadoYEnceradoPrecio] = useState("");
   const [modalShowCompleto, setModalShowCompleto] = useState(false);
   const [modalShowEncerado, setModalShowEncerado] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { carType, carTypeId } = useSelector((state) => state.client);
@@ -39,9 +41,15 @@ const Services = () => {
   const handleChange = (service, price) => {
     setService((prev) => (prev === service ? null : service));
     setTotal(price);
+    setShowError(false);
   };
 
   const handleNext = () => {
+    if (!service) {
+      setShowError(true);
+      setShowToast(true);
+      return;
+    }
     dispatch(
       addService({
         service,
@@ -60,6 +68,21 @@ const Services = () => {
 
   return (
     <>
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        bg="danger"
+        delay={3000}
+        autohide
+        style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}
+      >
+        <Toast.Header closeButton={false}>
+          <strong className="me-auto">Atención</strong>
+        </Toast.Header>
+        <Toast.Body className="text-white">
+          Debe seleccionar al menos un servicio para continuar.
+        </Toast.Body>
+      </Toast>
       <Form className="d-flex py-4  px-2 flex-column align-items-start gap-2 w-100">
         {/* Lavado Completo */}
         <div className="border p-1 rounded-3">
@@ -124,7 +147,11 @@ const Services = () => {
             onHide={() => setModalShowEncerado(false)}
           />
         </div>
-
+        {showError && (
+          <div className="text-danger fw-bold mt-2">
+            Debe seleccionar al menos un servicio para continuar.
+          </div>
+        )}
         <p className={styles.disclaimerFont}>
           Atención:
           <br /> Si al momento de la visita se determina que la categoría

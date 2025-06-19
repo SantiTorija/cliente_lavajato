@@ -33,6 +33,14 @@ const brandLogos = [
   },
 ];
 
+const neumaticosLogos = brandLogos.filter(
+  (logo) =>
+    logo.alt.toLowerCase().includes("winda") ||
+    logo.alt.toLowerCase().includes("bridgestone") ||
+    logo.alt.toLowerCase().includes("continental")
+);
+const neumaticosLogosRepetidos = [...neumaticosLogos, ...neumaticosLogos];
+
 export default function Servicios() {
   return (
     <>
@@ -88,9 +96,15 @@ export default function Servicios() {
         </section>
         <section>
           <Container className="mt-5" fluid>
-            <Row className="align-items-center">
+            <Row className="align-items-center mb-4">
               <Col className="d-sm-block d-md-none" md={6}>
-                <img className="w-75" src={neumaticos} alt="Cerámico" />
+                <img className="w-75 mb-2" src={neumaticos} alt="Cerámico" />
+                <BrandLogos
+                  id="logos-neumaticos"
+                  logos={neumaticosLogosRepetidos}
+                  autoplaySpeed={0}
+                  slidesToShow={{ desktop: 3, tablet: 3, mobile: 3 }}
+                />
               </Col>
               <Col className="d-none d-md-block ps-5" md={6}>
                 <img className="w-50 ps-5" src={neumaticos} alt="neumaticos" />
@@ -116,8 +130,15 @@ export default function Servicios() {
                 >
                   Contactar
                 </a>
-                <BrandLogos logos={brandLogos} />
               </Col>
+              <div className="w-100 d-none d-md-block">
+                <BrandLogos
+                  id="logos-neumaticos"
+                  logos={neumaticosLogosRepetidos}
+                  autoplaySpeed={0}
+                  slidesToShow={{ desktop: 3, tablet: 3, mobile: 3 }}
+                />
+              </div>
             </Row>
           </Container>
         </section>
