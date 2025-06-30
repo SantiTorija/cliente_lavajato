@@ -179,9 +179,4 @@ function MyCalendar() {
   );
 }
 
-MyCalendar.propTypes = {
-  onNext: PropTypes.func.isRequired,
-  onPrev: PropTypes.func.isRequired,
-};
-
 export default MyCalendar;
