@@ -64,7 +64,7 @@ export default function MisReservas() {
     <>
       <NavbarComponent />
       <Container className="py-5" style={{ minHeight: "70vh" }}>
-        <LoaderOverlay show={loading || loadingOrderToEdit} />
+        <LoaderOverlay show={loadingOrderToEdit} />
         <h1 className="text-white mb-4">Mis reservas</h1>
         <InputGroup
           className={`mb-4 ${styles.inputGroupNoGap}`}
@@ -98,7 +98,7 @@ export default function MisReservas() {
           >
             <Tab eventKey="Active" title="Activas">
               <div className="text-white">
-                {loading && "Cargando..."}
+                <LoaderOverlay show={loading} />
                 {error && <div>Error: {error.message}</div>}
                 {!loading &&
                   !error &&
