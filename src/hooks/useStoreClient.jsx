@@ -1,9 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { addClient } from "../redux/clientSlice";
+import { useDispatch } from "react-redux";
 
 const useStoreClient = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   const storeClient = async (
     firstname,
@@ -35,6 +38,20 @@ const useStoreClient = () => {
         },
       });
       console.log(response.data);
+      const data = response.data;
+      dispatch(
+        addClient({
+          firstname: data.firstname,
+          lastname: data.lastname,
+          email: data.email,
+          phone: data.phone,
+          clientId: data.id,
+          modelo: data.car.modelo,
+          marca: data.car.marca,
+          carType: data.car.carType,
+          carTypeId: data.car.carTypeId,
+        })
+      );
       setError(null);
     } catch (err) {
       setError(err);
