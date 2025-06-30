@@ -14,6 +14,7 @@ import useFetchOrdersByStatus from "../hooks/useFetchOrdersByStatus";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import useDeleteAlert from "../hooks/useDeleteAlert";
 import useChangeDate from "../hooks/useChangeDate";
+import LoaderOverlay from "../components/LoaderOverlay";
 
 export default function MisReservas() {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ export default function MisReservas() {
     useFetchOrdersByStatus();
   const [emailError, setEmailError] = useState("");
   const { handleDelete } = useDeleteAlert();
-  const { fetchOrderToEdit } = useChangeDate();
+  const { fetchOrderToEdit, loading } = useChangeDate();
 
   // Buscar reservas al hacer click en Buscar
   const handleBuscar = useCallback(() => {
@@ -63,6 +64,7 @@ export default function MisReservas() {
     <>
       <NavbarComponent />
       <Container className="py-5" style={{ minHeight: "70vh" }}>
+        <LoaderOverlay show={loading} />
         <h1 className="text-white mb-4">Mis reservas</h1>
         <InputGroup
           className={`mb-4 ${styles.inputGroupNoGap}`}
