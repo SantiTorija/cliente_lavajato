@@ -2,6 +2,7 @@ import { Container, Button, Modal, Form, Toast } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import useIsClient from "../hooks/useFetchIsClient";
 //import styles from "./emailModal.module.css";
+import LoaderOverlay from "../components/LoaderOverlay";
 
 function EmailModal(props) {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ function EmailModal(props) {
   const emailsMatch = email && confirmEmail && email === confirmEmail;
   const emailsDiffer = email && confirmEmail && email !== confirmEmail;
 
-  const { fetchIsClient } = useIsClient();
+  const { fetchIsClient, loading } = useIsClient();
 
   const handleNext = () => {
     if (!emailsMatch) {
@@ -33,6 +34,7 @@ function EmailModal(props) {
 
   return (
     <Container>
+      <LoaderOverlay show={loading} />
       <Modal
         {...props}
         size="md"
