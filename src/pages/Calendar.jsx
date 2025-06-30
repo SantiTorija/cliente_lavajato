@@ -8,7 +8,7 @@ import { Container, Col, Row, Button } from "react-bootstrap";
 import { prev } from "../redux/reserveStepSlice";
 import PropTypes from "prop-types";
 
-function MyCalendar({ onSlotSelect, selectedSlot, onNext, onPrev }) {
+function MyCalendar() {
   const dispatch = useDispatch();
   const [date] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
