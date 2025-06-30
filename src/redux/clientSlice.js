@@ -12,9 +12,7 @@ const clientSlice = createSlice({
       state.marca = action.payload.car.marca;
       state.modelo = action.payload.car.modelo;
       state.carType = action.payload.car.carType;
-      state.carTypeId = action.payload.car.carTypeId
-        ? action.payload.car.carTypeId
-        : action.payload.carTypeId;
+      state.carTypeId = action.payload.car.carTypeId;
       state.clientId = action.payload.id;
     },
     removeClient(state) {
