@@ -167,8 +167,6 @@ function MyCalendar() {
                 <AvailableSlots
                   slotsAvailable={findDaySlots(selectedDay)}
                   selectedDay={selectedDay}
-                  onSlotSelect={onSlotSelect}
-                  selectedSlot={selectedSlot}
                 />
               </Col>
             )}
