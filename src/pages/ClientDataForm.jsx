@@ -59,7 +59,7 @@ const ClientDataForm = () => {
         email,
         phone: fullPhone,
         car: { modelo, marca, carType },
-        carTypeId: carTypeId,
+        carTypeId,
       })
     );
     dispatch(next());
@@ -69,7 +69,6 @@ const ClientDataForm = () => {
     dispatch(emptyCart());
     dispatch(removeClient());
     dispatch(emptyOrderToEdit());
-    console.log("the fuk");
     navigate("/");
   };
 
