@@ -10,7 +10,7 @@ import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 
 const useChangeDate = () => {
-  const [loading, setLoading] = useState(false);
+  const [loadingOrderToEdit, setLoadingOrderToEdit] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const useChangeDate = () => {
       color: "#0d47a1",
     });
     if (!result.isConfirmed) return;
-    setLoading(true);
+    setLoadingOrderToEdit(true);
     try {
       const responseOrder = await axios.get(
         `${import.meta.env.VITE_API_URL}/order/${orderId}`
@@ -52,11 +52,11 @@ const useChangeDate = () => {
       setError(err);
       console.error("Error fetching reserve:", err);
     } finally {
-      setLoading(false);
+      setLoadingOrderToEdit(false);
     }
   };
 
-  return { fetchOrderToEdit, loading, error };
+  return { fetchOrderToEdit, loadingOrderToEdit, error };
 };
 
 export default useChangeDate;

@@ -24,7 +24,7 @@ export default function MisReservas() {
     useFetchOrdersByStatus();
   const [emailError, setEmailError] = useState("");
   const { handleDelete } = useDeleteAlert();
-  const { fetchOrderToEdit, loading } = useChangeDate();
+  const { fetchOrderToEdit, loadingOrderToEdit } = useChangeDate();
 
   // Buscar reservas al hacer click en Buscar
   const handleBuscar = useCallback(() => {
@@ -64,7 +64,7 @@ export default function MisReservas() {
     <>
       <NavbarComponent />
       <Container className="py-5" style={{ minHeight: "70vh" }}>
-        <LoaderOverlay show={loading} />
+        <LoaderOverlay show={loading || loadingOrderToEdit} />
         <h1 className="text-white mb-4">Mis reservas</h1>
         <InputGroup
           className={`mb-4 ${styles.inputGroupNoGap}`}
