@@ -2,11 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 
 const useStoreOrder = (date, slot) => {
-  const [loading, setLoading] = useState(false);
+  const [loadingStore, setLoadingStore] = useState(false);
   const [error, setError] = useState(null);
 
   const storeOrder = async (order) => {
-    setLoading(true);
+    setLoadingStore(true);
     try {
       const response = await axios({
         method: "POST",
@@ -33,11 +33,11 @@ const useStoreOrder = (date, slot) => {
       setError(err);
       console.error("Error at storeOrder:", err);
     } finally {
-      setLoading(false);
+      setLoadingStore(false);
     }
   };
 
-  return { storeOrder, loading, error };
+  return { storeOrder, loadingStore, error };
 };
 
 export default useStoreOrder;

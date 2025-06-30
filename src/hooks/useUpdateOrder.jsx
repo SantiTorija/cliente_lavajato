@@ -4,12 +4,12 @@ import { emptyOrderToEdit } from "../redux/orderToEditSlice";
 import { useDispatch } from "react-redux";
 
 const useUpdateOrder = () => {
-  const [loading, setLoading] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
   const updateOrder = async (order, orderToEdit) => {
-    setLoading(true);
+    setLoadingUpdate(true);
     try {
       const response = await axios({
         method: "PUT",
@@ -37,11 +37,11 @@ const useUpdateOrder = () => {
       setError(err);
       console.error("Error fetching availability:", err);
     } finally {
-      setLoading(false);
+      setLoadingUpdate(false);
     }
   };
 
-  return { updateOrder, loading, error };
+  return { updateOrder, loadingUpdate, error };
 };
 
 export default useUpdateOrder;

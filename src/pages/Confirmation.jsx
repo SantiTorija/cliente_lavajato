@@ -11,6 +11,7 @@ import styles from "./confirmation.module.css";
 import { prev } from "../redux/reserveStepSlice";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
+import LoaderOverlay from "../components/LoaderOverlay";
 
 function Confirmation() {
   const { firstname, lastname, email, carType, clientId, carTypeId } =
@@ -27,8 +28,11 @@ function Confirmation() {
     dispatch(prev());
   };
 
-  const { storeOrder, loading, error } = useStoreOrder(cart.date, cart.slot);
-  const { updateOrder } = useUpdateOrder();
+  const { storeOrder, loadingStore, error } = useStoreOrder(
+    cart.date,
+    cart.slot
+  );
+  const { updateOrder, loadingUpdate } = useUpdateOrder();
 
   const handleStoreOrder = async () => {
     try {
@@ -76,6 +80,8 @@ function Confirmation() {
   return (
     <>
       <Container className="py-4 text-start d-flex flex-column justify-content-center align-items-center">
+        <LoaderOverlay show={loadingStore} />
+        <LoaderOverlay show={loadingUpdate} />
         <Card className={`${styles.card} mt-4 mx-auto`}>
           <strong className="mb-3">Resumen</strong>
           <Card.Body className="d-flex flex-column align-items-start gap-2">
