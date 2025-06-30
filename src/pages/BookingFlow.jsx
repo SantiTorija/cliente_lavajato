@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import NavbarComponent from "../components/Navbar";
 import Calendar from "./Calendar";
 import ConfirmClientDataForm from "./ConfirmClientData";
 import ClientDataForm from "./ClientDataForm";
 import Services from "../components/Services";
 import Confirmation from "./Confirmation";
-import { useSelector } from "react-redux";
 import styles from "./bookingFlow.module.css";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
-
 import {
   Button,
   Card,
@@ -57,7 +55,7 @@ export default function BookingFlow() {
       <Container className="my-4 w-100 d-flex justify-content-center">
         <Card className={styles.bookingCard}>
           <h5 className="mb-2 mt-2 text-start ms-3">
-            {steps.find((s) => s.id === reserveStep).label}
+            {steps.find((s) => s.id === reserveStep)?.label || ""}
           </h5>
 
           <div>

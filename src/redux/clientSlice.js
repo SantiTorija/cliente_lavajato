@@ -12,16 +12,27 @@ const clientSlice = createSlice({
       state.marca = action.payload.car.marca;
       state.modelo = action.payload.car.modelo;
       state.carType = action.payload.car.carType;
-      state.carTypeId = action.payload.carTypeId;
-      state.clientId = action.payload.clientId;
+      state.carTypeId = action.payload.car.carTypeId;
+      state.clientId = action.payload.id;
     },
     removeClient(state) {
       Object.keys(state).forEach((key) => delete state[key]);
+    },
+    updateClientField: (state, action) => {
+      const { field, value } = action.payload;
+
+      if (["firstname", "lastname", "email", "phone"].includes(field)) {
+        state[field] = value;
+      }
+
+      if (["marca", "modelo", "carType", "carTypeId"].includes(field)) {
+        state[field] = value;
+      }
     },
   },
 });
 
 const { actions, reducer } = clientSlice;
-export const { addClient, removeClient } = actions;
+export const { addClient, removeClient, updateClientField } = actions;
 
 export default reducer;

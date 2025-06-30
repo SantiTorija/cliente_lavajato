@@ -18,6 +18,55 @@
     padding: 1rem;
     text-align: justify;
     margin-top: 1rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     border-radius: 10px;
   }
+  .serviceFont{
+    font-size: 1rem;
+  }
+
+  .warningFont{
+    font-size: .9rem;
+  }
+
+/* Responsive: Mobile first */
+@media (max-width: 575.98px) {
+  .serviceFont{
+    font-size: 0.9rem;
+  }
+  .disclaimerFont{
+    font-size: .7rem;
+  }
+
+  .priceFont{
+   font-size: .8rem;
+   color: rgb(34,162,171) !important;
+  }
+.moreInfoButton{
+  font-size: .8rem;
+  color: rgb(34,162,171) !important;
+}
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .serviceFont{
+    font-size: 0.9rem;
+  }
+  .disclaimerFont{
+    font-size: .7rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .serviceFont{
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Estilos para pantallas lg (laptops) */
+}
+
+@media (min-width: 1200px) {
+  /* Estilos para pantallas xl (desktops grandes) */
+}

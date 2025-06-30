@@ -1,42 +1,23 @@
 import styles from "./services.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, Button, Toast } from "react-bootstrap";
 import MoreInfoModal from "./MoreInfoModal";
 import { useSelector, useDispatch } from "react-redux";
 import { addService, emptyDateTime } from "../redux/cartSlice";
-import { useNavigate } from "react-router-dom";
-import { prev, next } from "../redux/reserveStepSlice";
+import { next, prev } from "../redux/reserveStepSlice";
 import useFetchServices from "../hooks/useFetchServices";
 
 const Services = () => {
   const [service, setService] = useState("");
-  const [lavadoCompletoPrecio, setLavadoCompletoPrecio] = useState("");
+  const [serviceId, setServiceId] = useState("");
   const [total, setTotal] = useState("");
-  const [lavadoYEnceradoPrecio, setLavadoYEnceradoPrecio] = useState("");
   const [modalShowCompleto, setModalShowCompleto] = useState(false);
-  const [modalShowEncerado, setModalShowEncerado] = useState(false);
   const [showError, setShowError] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { carType, carTypeId } = useSelector((state) => state.client);
-  const { prices } = useSelector((state) => state.services);
-  const { services, loading, error } = useFetchServices(parseInt(carTypeId));
+  const { carTypeId } = useSelector((state) => state.client);
 
-  useEffect(() => {
-    if (!carType || !prices) return;
-
-    if (carType === "Auto - Furgón chico") {
-      setLavadoCompletoPrecio(prices.chico.lavado);
-      setLavadoYEnceradoPrecio(prices.chico.lavadoYEncerado);
-    } else if (carType === "Pick Up pequeñas - SUV") {
-      setLavadoCompletoPrecio(prices.suv.lavado);
-      setLavadoYEnceradoPrecio(prices.suv.lavadoYEncerado);
-    } else {
-      setLavadoCompletoPrecio(prices.grande.lavado);
-      setLavadoYEnceradoPrecio(prices.grande.lavadoYEncerado);
-    }
-  }, [carType, prices]);
+  const { services, loading, error } = useFetchServices(carTypeId);
 
   const handleChange = (service, price) => {
     setService((prev) => (prev === service ? null : service));
@@ -53,7 +34,7 @@ const Services = () => {
     dispatch(
       addService({
         service,
-        carType,
+        serviceId,
         total,
       })
     );
@@ -84,69 +65,58 @@ const Services = () => {
         </Toast.Body>
       </Toast>
       <Form className="d-flex py-4  px-2 flex-column align-items-start gap-2 w-100">
-        {/* Lavado Completo */}
-        <div className="border p-1 rounded-3">
-          <div className="d-flex align-items-center w-100 mb-2">
-            <Form.Check
-              type="switch"
-              id="custom-switch-completo"
-              checked={service === "Lavado completo"}
-              onChange={() =>
-                handleChange("Lavado completo", lavadoCompletoPrecio)
-              }
+        {services.map((item) => (
+          <div
+            className="border p-2 rounded-3 mb-2 w-100"
+            key={item.Service.id}
+          >
+            <div
+              className="d-flex justify-content-between align-items-center w-100"
+              style={{ minHeight: 48 }}
+            >
+              <div className="d-flex align-items-center">
+                <Form.Check
+                  type="switch"
+                  id={`custom-switch-${item.Service.id}`}
+                  checked={serviceId === item.Service.id}
+                  onChange={() => {
+                    setServiceId(item.Service.id);
+                    setService(item.Service.name);
+                    setTotal(item.price);
+                    setShowError(false);
+                  }}
+                  className="me-2"
+                />
+                <div className="d-flex flex-column align-items-start">
+                  <span className={styles.serviceFont}>
+                    {item.Service.name}
+                  </span>
+                  <button
+                    type="button"
+                    className={`${styles.moreInfoButton} `}
+                    onClick={() => setModalShowCompleto(true)}
+                    style={{
+                      color: "#0097a7",
+                      background: "none",
+                      border: "none",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Más info
+                  </button>
+                </div>
+              </div>
+              <span className={styles.priceFont} style={{ color: "#444" }}>
+                ${Number(item.price).toFixed(2)}
+              </span>
+            </div>
+            <MoreInfoModal
+              serviceType={item.Service.name}
+              show={modalShowCompleto}
+              onHide={() => setModalShowCompleto(false)}
             />
-            <span className=" ms-2">
-              Lavado completo -{" "}
-              <button
-                type="button"
-                className={styles.moreInfoButton}
-                onClick={() => setModalShowCompleto(true)}
-              >
-                Más info -
-              </button>{" "}
-              ${lavadoCompletoPrecio}
-            </span>
           </div>
-
-          {/* Modal Lavado Completo */}
-          <MoreInfoModal
-            serviceType="Lavado completo"
-            show={modalShowCompleto}
-            onHide={() => setModalShowCompleto(false)}
-          />
-
-          {/* Lavado con Encerado */}
-          <div className="d-flex align-items-center w-100">
-            <Form.Check
-              type="switch"
-              id="custom-switch-encerado"
-              checked={service === "Lavado completo y encerado"}
-              onChange={() =>
-                handleChange(
-                  "Lavado completo y encerado",
-                  lavadoYEnceradoPrecio
-                )
-              }
-            />
-            <span className=" ms-2">
-              Lavado con encerado -{" "}
-              <button
-                type="button"
-                className={styles.moreInfoButton}
-                onClick={() => setModalShowEncerado(true)}
-              >
-                Más info -
-              </button>{" "}
-              ${lavadoYEnceradoPrecio}
-            </span>
-          </div>
-          {/* Modal Lavado con Encerado */}
-          <MoreInfoModal
-            serviceType="Lavado completo y encerado"
-            show={modalShowEncerado}
-            onHide={() => setModalShowEncerado(false)}
-          />
-        </div>
+        ))}
         {showError && (
           <div className="text-danger fw-bold mt-2">
             Debe seleccionar al menos un servicio para continuar.

@@ -12,7 +12,8 @@ const useStoreClient = () => {
     phone,
     modelo,
     marca,
-    carType
+    carType,
+    carTypeId
   ) => {
     setLoading(true);
     try {
@@ -30,6 +31,7 @@ const useStoreClient = () => {
           marca: marca,
           modelo: modelo,
           carType: carType,
+          carTypeId: carTypeId,
         },
       });
       console.log(response.data);

@@ -22,7 +22,9 @@ const useStoreOrder = (date, slot) => {
           phone: order.phone,
           email: order.email,
           cart: order.cart,
-          clientId: order.clientId,
+          ClientId: order.ClientId,
+          ServiceId: order.ServiceId,
+          CarTypeId: order.CarTypeId,
         },
       });
       setError(null);

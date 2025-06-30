@@ -38,10 +38,10 @@ const useChangeDate = () => {
       const responseClient = await axios.get(
         `${import.meta.env.VITE_API_URL}/client/${email.trim()}`
       );
-      console.log(responseOrder.data);
+      console.log(responseOrder.data[0]);
       if (responseOrder.data.length > 0) {
         dispatch(addReserveToEdit(responseOrder.data[0]));
-        dispatch(addClient(responseClient.data[0]));
+        dispatch(addClient(responseClient.data));
         navigate(`/reservas/${email}`);
       } else {
         console.log(responseOrder.data.length);

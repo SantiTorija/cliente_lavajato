@@ -12,6 +12,7 @@ const cartSlice = createSlice({
       state.total = action.payload.total;
       state.carType = action.payload.carType;
       state.service = action.payload.service;
+      state.serviceId = action.payload.serviceId;
     },
     emptyCart(state) {
       delete state.date;

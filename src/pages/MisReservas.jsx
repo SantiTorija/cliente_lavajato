@@ -140,7 +140,7 @@ export default function MisReservas() {
                               className="btn btn-outline-primary btn-sm"
                               title="Editar"
                               onClick={() =>
-                                fetchOrderToEdit(order.phone, order.id)
+                                fetchOrderToEdit(order.email, order.id)
                               }
                             >
                               <FaEdit />

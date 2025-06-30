@@ -13,9 +13,8 @@ import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
 
 function Confirmation() {
-  const { firstname, lastname, email, carType, id } = useSelector(
-    (state) => state.client
-  );
+  const { firstname, lastname, email, carType, clientId, carTypeId } =
+    useSelector((state) => state.client);
   const orders = useSelector((state) => state.orders);
 
   const cart = useSelector((state) => state.cart);
@@ -38,8 +37,9 @@ function Confirmation() {
         lastname: lastname,
         email: email,
         cart: cart,
-        service: cart.service,
-        clientId: id,
+        ServiceId: cart.serviceId,
+        ClientId: clientId,
+        CarTypeId: carTypeId,
       });
 
       dispatch(emptyCart());
@@ -59,7 +59,8 @@ function Confirmation() {
           lastname: lastname,
           phone: email,
           cart: cart,
-          service: cart.service,
+          ServiceId: cart.serviceId,
+          CarTypeId: carTypeId,
         },
         orders[0]
       );
@@ -81,9 +82,7 @@ function Confirmation() {
             <div className="d-flex justify-content-between align-items-center border rounded-3 p-1 w-100">
               <div className="d-flex flex-column">
                 <span className={styles.font}>Servicio </span>
-                <strong className={styles.font}>
-                  {cart.service} / {cart.carType}{" "}
-                </strong>
+                <strong className={styles.font}>{cart.service}</strong>
               </div>
               <div className={styles.font}>${cart.total}</div>
             </div>

@@ -29,13 +29,16 @@ const ClientDataForm = () => {
   const [carTypeId, setCarTypeId] = useState(null);
 
   const handleAddCarType = (carTypeId) => {
-    const selectedCarType = carTypes.find((type) => type.id === carTypeId);
+    const selectedCarType = carTypes.find(
+      (type) => type.id === parseInt(carTypeId)
+    );
     console.log(selectedCarType);
-    console.log(typeof carTypeId);
+
     if (selectedCarType) {
       setCarType(selectedCarType.name);
       setCarTypeId(selectedCarType.id);
     }
+    console.log(carType, carTypeId);
   };
 
   const handleSubmit = async (e) => {
@@ -48,7 +51,8 @@ const ClientDataForm = () => {
       fullPhone,
       modelo,
       marca,
-      carType
+      carType,
+      carTypeId
     );
     dispatch(
       addClient({
@@ -67,6 +71,7 @@ const ClientDataForm = () => {
     dispatch(emptyCart());
     dispatch(removeClient());
     dispatch(emptyOrderToEdit());
+    console.log("the fuk");
     navigate("/");
   };
 
@@ -156,7 +161,6 @@ const ClientDataForm = () => {
             <Button
               className="back-button w-50"
               type="button"
-              disabled={!carType || !firstname || !lastname}
               onClick={handleBack}
             >
               Atrás

@@ -1,18 +1,18 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import AvailableSlots from "../components/AvailableSlots";
-import axios from "axios";
 import useFetchAvailableDays from "../hooks/useFetchAvailability";
-import { useSelector } from "react-redux";
-import { Container, Col, Row } from "react-bootstrap";
-import NavbarComponent from "../components/Navbar";
+import { useSelector, useDispatch } from "react-redux";
+import { Container, Col, Row, Button } from "react-bootstrap";
+import { prev } from "../redux/reserveStepSlice";
+import PropTypes from "prop-types";
 
-function MyCalendar() {
-  const [date, setDate] = useState(new Date());
+function MyCalendar({ onSlotSelect, selectedSlot, onNext, onPrev }) {
+  const dispatch = useDispatch();
+  const [date] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [activeDate, setActiveDate] = useState(new Date());
-  /*   const [availableDays, setAvailableDays] = useState([]);*/
   const [loading, setLoading] = useState(false);
 
   const orders = useSelector((state) => state.orders);
@@ -74,6 +74,8 @@ function MyCalendar() {
     setSelectedDay(null);
     const dateKey = newDate.toISOString().split("T")[0];
     setSelectedDay(dateKey);
+    // Limpiar el slot seleccionado al cambiar de día
+    onSlotSelect("");
   };
 
   const handleTileClassName = (date) => {
@@ -111,6 +113,10 @@ function MyCalendar() {
     return false;
   };
 
+  const handlePrev = () => {
+    dispatch(prev());
+  };
+
   return (
     availableDays && (
       <>
@@ -135,19 +141,49 @@ function MyCalendar() {
                 />
               )}
             </Col>
+            {!selectedDay ? (
+              <div className="w-100 d-flex justify-content-center pt-3 gap-2">
+                <Button
+                  type="button"
+                  className="mt-2 back-button w-50"
+                  onClick={handlePrev}
+                >
+                  Atrás
+                </Button>
+                <Button
+                  type="button"
+                  className="mt-2 action-button w-50"
+                  title="Selecciona un día para continuar"
+                  disabled
+                >
+                  Siguiente
+                </Button>
+              </div>
+            ) : (
+              ""
+            )}
             {selectedDay && (
               <Col className="w-100 mt-2">
                 <AvailableSlots
                   slotsAvailable={findDaySlots(selectedDay)}
                   selectedDay={selectedDay}
+                  onSlotSelect={onSlotSelect}
+                  selectedSlot={selectedSlot}
                 />
               </Col>
             )}
           </Row>
+
+          {/* Botones de navegación cuando no hay día seleccionado */}
         </Container>
       </>
     )
   );
 }
+
+MyCalendar.propTypes = {
+  onNext: PropTypes.func.isRequired,
+  onPrev: PropTypes.func.isRequired,
+};
 
 export default MyCalendar;

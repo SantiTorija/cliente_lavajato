@@ -11,14 +11,14 @@ const useIsClient = () => {
   const dispatch = useDispatch();
 
   const fetchIsClient = async (email) => {
-    console.log(email);
     setLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/client/${email.trim()}`
       );
+      console.log(response.data);
       if (response.data) {
-        dispatch(addClient(response.data[0]));
+        dispatch(addClient(response.data));
         navigate(`/reservas/${email}`);
       } else {
         navigate(`/reservas/${email}`);

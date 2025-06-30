@@ -99,12 +99,7 @@ export default function Servicios() {
             <Row className="align-items-center mb-4">
               <Col className="d-sm-block d-md-none" md={6}>
                 <img className="w-75 mb-2" src={neumaticos} alt="Cerámico" />
-                <BrandLogos
-                  id="logos-neumaticos"
-                  logos={neumaticosLogosRepetidos}
-                  autoplaySpeed={0}
-                  slidesToShow={{ desktop: 3, tablet: 3, mobile: 3 }}
-                />
+                <BrandLogos logos={neumaticosLogosRepetidos} />
               </Col>
               <Col className="d-none d-md-block ps-5" md={6}>
                 <img className="w-50 ps-5" src={neumaticos} alt="neumaticos" />
@@ -132,12 +127,7 @@ export default function Servicios() {
                 </a>
               </Col>
               <div className="w-100 d-none d-md-block">
-                <BrandLogos
-                  id="logos-neumaticos"
-                  logos={neumaticosLogosRepetidos}
-                  autoplaySpeed={0}
-                  slidesToShow={{ desktop: 3, tablet: 3, mobile: 3 }}
-                />
+                <BrandLogos logos={neumaticosLogosRepetidos} />
               </div>
             </Row>
           </Container>
@@ -186,6 +176,7 @@ export default function Servicios() {
             <Row className="align-items-center">
               <Col className="d-sm-block d-md-none" md={6}>
                 <img className="w-100" src={chapa} alt="Cerámico" />
+                <BrandLogos logos={brandLogos} />
               </Col>
               <Col className="d-none d-md-block ps-5" md={6}>
                 <img className="w-75 ps-5" src={chapa} alt="neumaticos" />
@@ -212,6 +203,9 @@ export default function Servicios() {
                   Contactar
                 </a>
               </Col>
+              <div className="d-none d-md-block w-100">
+                <BrandLogos logos={brandLogos} />
+              </div>
             </Row>
           </Container>
         </section>

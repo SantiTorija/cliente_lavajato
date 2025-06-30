@@ -26,6 +26,8 @@ const useUpdateOrder = () => {
           lastname: order.lastname,
           phone: order.phone,
           cart: order.cart,
+          ServiceId: order.ServiceId,
+          CarTypeId: order.CartTypeId,
         },
       });
       dispatch(emptyOrderToEdit());
