@@ -24,10 +24,6 @@ function MyCalendar() {
   // Fetch availability when month/year changes
   const { availableDays } = useFetchAvailableDays(activeDate);
 
-  useEffect(() => {
-    console.log(orders);
-  }, []);
-
   // Handle calendar view change
   const handleActiveStartDateChange = (activeStartDate) => {
     setSelectedDay(null);
@@ -74,8 +70,6 @@ function MyCalendar() {
     setSelectedDay(null);
     const dateKey = newDate.toISOString().split("T")[0];
     setSelectedDay(dateKey);
-    // Limpiar el slot seleccionado al cambiar de día
-    onSlotSelect("");
   };
 
   const handleTileClassName = (date) => {
