@@ -32,13 +32,13 @@ const ClientDataForm = () => {
     const selectedCarType = carTypes.find(
       (type) => type.id === parseInt(carTypeId)
     );
-    console.log(selectedCarType);
+    console.log(selectedCarType, "selectedCarType");
 
     if (selectedCarType) {
       setCarType(selectedCarType.name);
       setCarTypeId(selectedCarType.id);
     }
-    console.log(carType, carTypeId);
+    console.log(carType, carTypeId, "carType, carTypeId");
   };
 
   const handleSubmit = async (e) => {
