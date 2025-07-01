@@ -103,8 +103,8 @@ function MyCalendar() {
   const disableSundays = ({ date, view }) => {
     // Solo deshabilitar en la vista de mes
     if (view === "month") {
-      // Deshabilitar si el día es domingo (día 0)
-      return date.getDay() === 0;
+      // Deshabilitar si el día es sábado (6) o domingo (0)
+      return date.getDay() === 0 || date.getDay() === 6;
     }
     return false;
   };
