@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NavbarComponent from "../components/Navbar";
 import Calendar from "./Calendar";
 import ConfirmClientDataForm from "./ConfirmClientData";
@@ -8,6 +8,7 @@ import Confirmation from "./Confirmation";
 import styles from "./bookingFlow.module.css";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
+import { prev, next } from "../redux/reserveStepSlice";
 import {
   Button,
   Card,
@@ -27,6 +28,14 @@ const steps = [
 export default function BookingFlow() {
   const reserveStep = useSelector((state) => state.reserveStep);
   const client = useSelector((state) => state.client);
+  const dispatch = useDispatch();
+
+  const handlePrev = () => {
+    dispatch(prev());
+  };
+  const handleNext = () => {
+    dispatch(next());
+  };
 
   const renderStepContent = () => {
     switch (reserveStep) {
@@ -53,7 +62,11 @@ export default function BookingFlow() {
     <>
       <NavbarComponent />
       <Container className="my-4 w-100 d-flex justify-content-center">
-        <Card className={styles.bookingCard}>
+        <Card
+          className={`${styles.bookingCard} ${
+            reserveStep === 2 ? styles.calendarStepCard : ""
+          }`}
+        >
           <h5 className="mb-2 mt-2 text-start ms-3">
             {steps.find((s) => s.id === reserveStep)?.label || ""}
           </h5>
@@ -69,6 +82,21 @@ export default function BookingFlow() {
           </div>
 
           <Card.Body>{renderStepContent()}</Card.Body>
+          {reserveStep === 2 && (
+            <div className="d-flex justify-content-center mt-4 gap-3">
+              <div className={styles.buttonWrapper}>
+                <Button className="back-button w-50 me-1" onClick={handlePrev}>
+                  Atrás
+                </Button>
+                <Button
+                  className="action-button w-50 ms-1"
+                  onClick={handleNext}
+                >
+                  Siguiente
+                </Button>
+              </div>
+            </div>
+          )}
         </Card>
       </Container>
       <WhatsappButton />

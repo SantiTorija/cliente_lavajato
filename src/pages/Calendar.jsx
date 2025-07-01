@@ -118,10 +118,13 @@ function MyCalendar() {
       <>
         <Container className="w-100 px-4">
           <LoaderOverlay show={loadingAvailableDays} />
-          <Row className="align-items-between gap-4  d-flex justify-content-center align-items-center mt-5 bg-white rounded-3 py-2">
-            <Col className="w-100  d-flex flex-column align-items-start mb-2 border-white ">
+          <Row className="align-items-center gap-4 d-flex justify-content-center  mt-5 bg-white rounded-3 py-2">
+            <Col
+              xs={12}
+              md={6}
+              className="d-flex flex-column align-items-start mb-2 border-white "
+            >
               {/* <span>{orders ? `Bienvenido ${orders[0].firstname}` : ""}</span> */}
-
               {loading ? (
                 <p>Loading availableDays...</p>
               ) : (
@@ -138,38 +141,21 @@ function MyCalendar() {
                 />
               )}
             </Col>
-            {!selectedDay ? (
-              <div className="w-100 d-flex justify-content-center pt-3 gap-2">
-                <Button
-                  type="button"
-                  className="mt-2 back-button w-50"
-                  onClick={handlePrev}
-                >
-                  Atrás
-                </Button>
-                <Button
-                  type="button"
-                  className="mt-2 action-button w-50"
-                  title="Selecciona un día para continuar"
-                  disabled
-                >
-                  Siguiente
-                </Button>
-              </div>
-            ) : (
-              ""
-            )}
-            {selectedDay && (
-              <Col className="w-100 mt-2">
+            <Col
+              xs={12}
+              md={4}
+              className={`mt-2 flex-column align-items-center justify-content-center ${
+                selectedDay ? "d-flex" : "d-none"
+              }`}
+            >
+              {selectedDay && (
                 <AvailableSlots
                   slotsAvailable={findDaySlots(selectedDay)}
                   selectedDay={selectedDay}
                 />
-              </Col>
-            )}
+              )}
+            </Col>
           </Row>
-
-          {/* Botones de navegación cuando no hay día seleccionado */}
         </Container>
       </>
     )

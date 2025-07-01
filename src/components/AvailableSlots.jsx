@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addDateAndTime } from "../redux/cartSlice";
+import { addDateAndTime, emptyDateTime } from "../redux/cartSlice";
 import { next, prev } from "../redux/reserveStepSlice";
 import useFormatDate from "../hooks/useFormatDate";
 import PropTypes from "prop-types";
@@ -15,18 +15,12 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
   const [loading, setLoading] = useState(false);
   const [filteredSlots, setFilteredSlots] = useState([]);
 
-  const slot = [
-    "08 AM - 10 AM",
-    "10 AM - 12 PM",
-    "13 PM - 15 PM",
-    "15 PM - 17 PM",
-  ];
+  const slot = ["8:00 a.m.", "10:00 a.m.", "1:00 p.m.", "3:00 p.m."];
 
-  const handleNext = () => {
-    if (selectedSlot) {
-      dispatch(addDateAndTime({ date: selectedDay, slot: selectedSlot }));
-      dispatch(next());
-    }
+  const handleSelectSlot = (timeSlot) => {
+    setSelectedSlot(timeSlot);
+    dispatch(emptyDateTime());
+    dispatch(addDateAndTime({ date: selectedDay, slot: timeSlot }));
   };
 
   const handlePrev = () => {
@@ -53,12 +47,12 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
           <div className="d-flex flex-column align-items-start gap-3">
             <strong className="mb-4">Disponibles para {formatDate}:</strong>
           </div>
-          <div className="d-flex flex-column align-items-start gap-3 w-100 w-md-100">
+          <div className="d-flex flex-column align-items-center gap-3 w-100 w-md-100">
             <div className={styles.slotsContainer}>
               {filteredSlots.map((slotItem) => (
                 <div
                   key={slotItem}
-                  onClick={() => setSelectedSlot(slotItem)}
+                  onClick={() => handleSelectSlot(slotItem)}
                   className={`${styles.slotItem} ${
                     selectedSlot === slotItem ? styles.active : ""
                   }`}
@@ -70,7 +64,7 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
           </div>
 
           {/* Botones de navegación */}
-          <div className="d-flex justify-content-around mt-4 w-100 gap-3">
+          {/*  <div className="d-flex justify-content-around mt-4 w-100 gap-3">
             <Button className="back-button w-50" onClick={handlePrev}>
               Atrás
             </Button>
@@ -81,7 +75,7 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
             >
               Siguiente
             </Button>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="d-flex flex-column justify-content-between h-100">

@@ -1,9 +1,22 @@
+.calendarStepCard {
+  max-width: 100%;
+}
+.buttonWrapper{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+  display: flex;
+  padding-bottom: 1rem;
+}
+
 .bookingCard {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
   border-radius: 12px;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 576px) {
@@ -11,20 +24,40 @@
     max-width: 80%;
     margin: 0 10px;
   }
+  .buttonWrapper{
+    width: 60%;
+  }
 }
 
 @media (min-width: 768px) {
   .bookingCard {
-    max-width: 50%;
+    max-width: 80%;
   }
+  .calendarStepCard {
+    max-width: 70%;
+  }
+  .buttonWrapper{
+    width: 60%;
+  }
+
 }
 
 @media (min-width: 1200px) {
   .bookingCard {
     max-width: 35%;
   }
+  .calendarStepCard {
+    max-width: 50%;
+  }
+  .buttonWrapper{
+    width: 60%;
+    
+  }
 }
 
 /* Opcional: ajustar paddings en mobile */
+
+
+
 
   

@@ -17,7 +17,7 @@
   }
   
   .slotItem {
-    padding: .5rem 1rem ;
+    padding: .5rem 2rem ;
     border: .5px solid #71e38c ;
     border-radius: 8px;
     text-align: center;
@@ -25,7 +25,7 @@
     color: #595959;
     background-color: #cee8d4 ;
     font-weight: 600;
-    font-size: .8rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
     width: 100%;
   }
