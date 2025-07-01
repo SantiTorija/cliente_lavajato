@@ -41,7 +41,7 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
     setTimeout(() => {
       setFilteredSlots(slot.filter((slot) => !slotsAvailable.includes(slot)));
       setLoading(false);
-    }, 100);
+    }, 250);
   }, [slotsAvailable]);
   const formatDate = useFormatDate(selectedDay);
 
