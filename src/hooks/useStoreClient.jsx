@@ -39,16 +39,19 @@ const useStoreClient = () => {
       });
       console.log(response.data);
       const data = response.data;
+      console.log(data);
       dispatch(
         addClient({
           firstname: data.firstname,
           lastname: data.lastname,
           email: data.email,
           phone: data.phone,
-          modelo: data.car.modelo,
-          marca: data.car.marca,
-          carType: data.car.carType,
-          carTypeId: data.car.carTypeId,
+          car: {
+            modelo: data.car.modelo,
+            marca: data.car.marca,
+            carType: data.car.carType,
+            carTypeId: data.car.carTypeId,
+          },
           id: data.id,
         })
       );

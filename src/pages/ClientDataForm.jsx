@@ -52,15 +52,6 @@ const ClientDataForm = () => {
       carType,
       carTypeId
     );
-    dispatch(
-      addClient({
-        firstname,
-        lastname,
-        email,
-        phone: fullPhone,
-        car: { modelo, marca, carType, carTypeId },
-      })
-    );
     dispatch(next());
   };
 
