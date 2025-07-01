@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addService, emptyDateTime } from "../redux/cartSlice";
 import { next, prev } from "../redux/reserveStepSlice";
 import useFetchServices from "../hooks/useFetchServices";
+import LoaderOverlay from "./LoaderOverlay";
 
 const Services = () => {
   const [service, setService] = useState("");
@@ -49,6 +50,7 @@ const Services = () => {
 
   return (
     <>
+      <LoaderOverlay show={loading} />
       <Toast
         show={showToast}
         onClose={() => setShowToast(false)}

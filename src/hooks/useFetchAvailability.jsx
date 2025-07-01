@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useFetchAvailableDays = (activeDate) => {
   const [availableDays, setAvailableDays] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingAvailableDays, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const useFetchAvailableDays = (activeDate) => {
     fetchAvailability();
   }, [activeDate]);
 
-  return { availableDays, loading, error };
+  return { availableDays, loadingAvailableDays, error };
 };
 
 export default useFetchAvailableDays;

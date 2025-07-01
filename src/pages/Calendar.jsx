@@ -6,6 +6,7 @@ import useFetchAvailableDays from "../hooks/useFetchAvailability";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import { prev } from "../redux/reserveStepSlice";
+import LoaderOverlay from "../components/LoaderOverlay";
 import PropTypes from "prop-types";
 
 function MyCalendar() {
@@ -22,7 +23,8 @@ function MyCalendar() {
   }, []);
 
   // Fetch availability when month/year changes
-  const { availableDays } = useFetchAvailableDays(activeDate);
+  const { availableDays, loadingAvailableDays } =
+    useFetchAvailableDays(activeDate);
 
   // Handle calendar view change
   const handleActiveStartDateChange = (activeStartDate) => {
@@ -115,6 +117,7 @@ function MyCalendar() {
     availableDays && (
       <>
         <Container className="w-100 px-4">
+          <LoaderOverlay show={loadingAvailableDays} />
           <Row className="align-items-between gap-4  d-flex justify-content-center align-items-center mt-5 bg-white rounded-3 py-2">
             <Col className="w-100  d-flex flex-column align-items-start mb-2 border-white ">
               {/* <span>{orders ? `Bienvenido ${orders[0].firstname}` : ""}</span> */}

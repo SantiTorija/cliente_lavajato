@@ -6,10 +6,14 @@ import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import styles from "./availableSlot.module.css";
 import { useState } from "react";
+import LoaderOverlay from "./LoaderOverlay";
+import { useEffect } from "react";
 
 const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
   const dispatch = useDispatch();
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [filteredSlots, setFilteredSlots] = useState([]);
 
   const slot = [
     "08 AM - 10 AM",
@@ -29,22 +33,29 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
     dispatch(prev());
   };
 
-  function slotsToShow(slot, ocupados) {
+  /* function slotsToShow(slot, ocupados) {
     return slot.filter((slot) => !ocupados.includes(slot));
-  }
-
+  } */
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setFilteredSlots(slot.filter((slot) => !slotsAvailable.includes(slot)));
+      setLoading(false);
+    }, 100);
+  }, [slotsAvailable]);
   const formatDate = useFormatDate(selectedDay);
 
   return (
     <>
       {slotsAvailable.length < 4 ? (
         <div className="d-flex flex-column justify-content-between h-100">
+          <LoaderOverlay show={loading} />
           <div className="d-flex flex-column align-items-start gap-3">
             <strong className="mb-4">Disponibles para {formatDate}:</strong>
           </div>
           <div className="d-flex flex-column align-items-start gap-3 w-100 w-md-100">
             <div className={styles.slotsContainer}>
-              {slotsToShow(slot, slotsAvailable).map((slotItem) => (
+              {filteredSlots.map((slotItem) => (
                 <div
                   key={slotItem}
                   onClick={() => setSelectedSlot(slotItem)}
