@@ -45,11 +45,11 @@ const useStoreClient = () => {
           lastname: data.lastname,
           email: data.email,
           phone: data.phone,
-          clientId: data.id,
           modelo: data.car.modelo,
           marca: data.car.marca,
           carType: data.car.carType,
           carTypeId: data.car.carTypeId,
+          id: data.id,
         })
       );
       setError(null);
