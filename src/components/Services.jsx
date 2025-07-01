@@ -12,19 +12,13 @@ const Services = () => {
   const [service, setService] = useState("");
   const [serviceId, setServiceId] = useState("");
   const [total, setTotal] = useState("");
-  const [modalShowCompleto, setModalShowCompleto] = useState(false);
+  const [modalService, setModalService] = useState(null);
   const [showError, setShowError] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const dispatch = useDispatch();
   const { carTypeId } = useSelector((state) => state.client);
 
-  const { services, loading, error } = useFetchServices(carTypeId);
-
-  const handleChange = (service, price) => {
-    setService((prev) => (prev === service ? null : service));
-    setTotal(price);
-    setShowError(false);
-  };
+  const { services, loading } = useFetchServices(carTypeId);
 
   const handleNext = () => {
     if (!service) {
@@ -99,7 +93,7 @@ const Services = () => {
                       <button
                         type="button"
                         className={`${styles.moreInfoButton} `}
-                        onClick={() => setModalShowCompleto(true)}
+                        onClick={() => setModalService(item)}
                         style={{
                           color: "#0097a7",
                           background: "none",
@@ -115,11 +109,6 @@ const Services = () => {
                     ${Number(item.price).toFixed(2)}
                   </span>
                 </div>
-                <MoreInfoModal
-                  serviceType={item.Service.name}
-                  show={modalShowCompleto}
-                  onHide={() => setModalShowCompleto(false)}
-                />
               </div>
             ))}
             {showError && (
@@ -151,6 +140,15 @@ const Services = () => {
               Siguiente
             </Button>
           </div>
+          {/* Modal de información de servicio */}
+          {modalService && (
+            <MoreInfoModal
+              serviceType={modalService.Service.name}
+              serviceDescription={modalService.Service.description}
+              show={!!modalService}
+              onHide={() => setModalService(null)}
+            />
+          )}
         </>
       )}
     </>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Container, Form, Button, Toast, Spinner } from "react-bootstrap";
+import { Container, Form, Toast, Spinner } from "react-bootstrap";
 import { next } from "../redux/reserveStepSlice";
 import { updateClientField, removeClient } from "../redux/clientSlice";
 import { FaCheck } from "react-icons/fa";
@@ -135,14 +135,28 @@ const ConfirmClientDataForm = () => {
                   value={localPhone}
                   onChange={(e) => setLocalPhone(e.target.value)}
                   required
-                  className={styles.phoneInput}
+                  className={`${styles.phoneInput} ${
+                    isEditing
+                      ? styles.editingHighlight
+                      : editingField
+                      ? styles.disabledField
+                      : ""
+                  }`}
                   autoFocus
+                  disabled={editingField && !isEditing}
                 />
-                <Button
-                  className={`${styles.editButton} ${styles.confirm}`}
+                <button
+                  type="button"
+                  className={`${styles.editButton} ${styles.confirm} ${
+                    isEditing
+                      ? styles.editingHighlight
+                      : editingField
+                      ? styles.disabledField
+                      : ""
+                  }`}
                   onClick={() => handleConfirm("phone", localPhone)}
                   title="Confirmar"
-                  disabled={loading}
+                  disabled={loading || (editingField && !isEditing)}
                   onMouseEnter={(e) => {
                     if (!loading) {
                       e.target.style.transform = "translateY(-50%) scale(1.1)";
@@ -159,7 +173,7 @@ const ConfirmClientDataForm = () => {
                   ) : (
                     <FaCheck />
                   )}
-                </Button>
+                </button>
               </>
             ) : (
               <>
@@ -169,13 +183,19 @@ const ConfirmClientDataForm = () => {
                   placeholder="Número sin código"
                   value={localPhone}
                   readOnly
-                  className={styles.phoneInput}
+                  className={`${styles.phoneInput} ${
+                    editingField ? styles.disabledField : ""
+                  }`}
+                  disabled={!!editingField}
                 />
                 <button
-                  className={`${styles.editButton} ${styles.edit}`}
+                  type="button"
+                  className={`${styles.editButton} ${styles.edit} ${
+                    editingField ? styles.disabledField : ""
+                  }`}
                   onClick={() => handleEdit("phone")}
                   title="Editar"
-                  disabled={loading}
+                  disabled={loading || !!editingField}
                   onMouseEnter={(e) => {
                     if (!loading) {
                       e.target.style.transform = "translateY(-50%) scale(1.1)";
@@ -218,7 +238,14 @@ const ConfirmClientDataForm = () => {
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
                   autoFocus
-                  className={styles.readOnlyField}
+                  className={`${styles.readOnlyField} ${
+                    isEditing
+                      ? styles.editingHighlight
+                      : editingField
+                      ? styles.disabledField
+                      : ""
+                  }`}
+                  disabled={editingField && !isEditing}
                 >
                   <option value="" disabled>
                     Selecciona un tipo de auto
@@ -235,14 +262,28 @@ const ConfirmClientDataForm = () => {
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
                   autoFocus
-                  className={styles.readOnlyField}
+                  className={`${styles.readOnlyField} ${
+                    isEditing
+                      ? styles.editingHighlight
+                      : editingField
+                      ? styles.disabledField
+                      : ""
+                  }`}
+                  disabled={editingField && !isEditing}
                 />
               )}
-              <Button
-                className={`${styles.editButton} ${styles.confirm}`}
+              <button
+                type="button"
+                className={`${styles.editButton} ${styles.confirm} ${
+                  isEditing
+                    ? styles.editingHighlight
+                    : editingField
+                    ? styles.disabledField
+                    : ""
+                }`}
                 onClick={() => handleConfirm(field, value)}
                 title="Confirmar"
-                disabled={loading}
+                disabled={loading || (editingField && !isEditing)}
                 onMouseEnter={(e) => {
                   if (!loading) {
                     e.target.style.transform = "translateY(-50%) scale(1.1)";
@@ -259,7 +300,7 @@ const ConfirmClientDataForm = () => {
                 ) : (
                   <FaCheck />
                 )}
-              </Button>
+              </button>
             </>
           ) : (
             <>
@@ -267,13 +308,19 @@ const ConfirmClientDataForm = () => {
                 type={type}
                 value={value}
                 readOnly
-                className={styles.readOnlyField}
+                className={`${styles.readOnlyField} ${
+                  editingField ? styles.disabledField : ""
+                }`}
+                disabled={!!editingField}
               />
               <button
-                className={`${styles.editButton} ${styles.edit}`}
+                type="button"
+                className={`${styles.editButton} ${styles.edit} ${
+                  editingField ? styles.disabledField : ""
+                }`}
                 onClick={() => handleEdit(field)}
                 title="Editar"
-                disabled={loading}
+                disabled={loading || !!editingField}
                 onMouseEnter={(e) => {
                   if (!loading) {
                     e.target.style.transform = "translateY(-50%) scale(1.1)";
@@ -348,8 +395,17 @@ const ConfirmClientDataForm = () => {
                     value={localCarTypeId || ""}
                     onChange={handleCarTypeChange}
                     autoFocus
-                    className={styles.readOnlyField}
-                    disabled={loadingCarTypes}
+                    className={`${styles.readOnlyField} ${
+                      editingField === "carType"
+                        ? styles.editingHighlight
+                        : editingField
+                        ? styles.disabledField
+                        : ""
+                    }`}
+                    disabled={
+                      loadingCarTypes ||
+                      (editingField && editingField !== "carType")
+                    }
                   >
                     <option value="" disabled>
                       Selecciona un tipo de auto
@@ -360,8 +416,15 @@ const ConfirmClientDataForm = () => {
                       </option>
                     ))}
                   </Form.Select>
-                  <Button
-                    className={`${styles.editButton} ${styles.confirm}`}
+                  <button
+                    type="button"
+                    className={`${styles.editButton} ${styles.confirm} ${
+                      editingField === "carType"
+                        ? styles.editingHighlight
+                        : editingField
+                        ? styles.disabledField
+                        : ""
+                    }`}
                     onClick={() =>
                       handleConfirm("carType", {
                         name: localCarType,
@@ -369,14 +432,16 @@ const ConfirmClientDataForm = () => {
                       })
                     }
                     title="Confirmar"
-                    disabled={loading}
+                    disabled={
+                      loading || (editingField && editingField !== "carType")
+                    }
                   >
                     {loading ? (
                       <Spinner animation="border" size="sm" />
                     ) : (
                       <FaCheck />
                     )}
-                  </Button>
+                  </button>
                 </>
               ) : (
                 <>
@@ -384,13 +449,19 @@ const ConfirmClientDataForm = () => {
                     type="text"
                     value={localCarType}
                     readOnly
-                    className={styles.readOnlyField}
+                    className={`${styles.readOnlyField} ${
+                      editingField ? styles.disabledField : ""
+                    }`}
+                    disabled={!!editingField}
                   />
                   <button
-                    className={`${styles.editButton} ${styles.edit}`}
+                    type="button"
+                    className={`${styles.editButton} ${styles.edit} ${
+                      editingField ? styles.disabledField : ""
+                    }`}
                     onClick={() => setEditingField("carType")}
                     title="Editar"
-                    disabled={loading}
+                    disabled={loading || !!editingField}
                   >
                     <MdModeEditOutline />
                   </button>
@@ -407,7 +478,7 @@ const ConfirmClientDataForm = () => {
         >
           Volver
         </button>
-        <Button
+        <button
           className={`action-button ${styles.actionButton}`}
           onClick={() => dispatch(next())}
           disabled={editingField !== null || loading}
@@ -418,7 +489,7 @@ const ConfirmClientDataForm = () => {
           }
         >
           Siguiente
-        </Button>
+        </button>
       </div>
     </>
   );

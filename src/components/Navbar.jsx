@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import styles from "./navbar.module.css";
-import logoNuevo from "../assets/images/logoNuevo.png";
+import logoNuevo from "../assets/images/logoLavajato.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { emptyCart } from "../redux/cartSlice";

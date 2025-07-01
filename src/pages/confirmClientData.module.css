@@ -115,4 +115,19 @@
 
 .actionButton {
   width: 50%;
+}
+
+.editingHighlight {
+  border: 2px solid #4ade80 !important;
+  box-shadow: 0 0 0 2px #bbf7d0;
+  background: #fff;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.disabledField {
+  background: #f3f4f6 !important;
+  color: #a1a1aa !important;
+  opacity: 1 !important;
+  cursor: not-allowed !important;
+  border-color: #e5e7eb !important;
 } 
