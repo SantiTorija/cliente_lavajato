@@ -3,14 +3,12 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import AvailableSlots from "../components/AvailableSlots";
 import useFetchAvailableDays from "../hooks/useFetchAvailability";
-import { useSelector, useDispatch } from "react-redux";
-import { Container, Col, Row, Button } from "react-bootstrap";
-import { prev } from "../redux/reserveStepSlice";
+import { useSelector } from "react-redux";
+import { Container, Col, Row } from "react-bootstrap";
 import LoaderOverlay from "../components/LoaderOverlay";
 import PropTypes from "prop-types";
 
-function MyCalendar() {
-  const dispatch = useDispatch();
+function MyCalendar({ showError = false }) {
   const [date] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [activeDate, setActiveDate] = useState(new Date());
@@ -109,10 +107,6 @@ function MyCalendar() {
     return false;
   };
 
-  const handlePrev = () => {
-    dispatch(prev());
-  };
-
   return (
     availableDays && (
       <>
@@ -140,6 +134,14 @@ function MyCalendar() {
                   locale="es" // Configura el idioma
                 />
               )}
+              {/* Mensaje de error debajo del calendario */}
+              {showError && (
+                <div className="mt-3 text-center w-100">
+                  <p className="text-danger mb-0 fw-bold">
+                    ⚠️ Selecciona una fecha y hora antes de continuar
+                  </p>
+                </div>
+              )}
             </Col>
             <Col
               xs={12}
@@ -161,5 +163,9 @@ function MyCalendar() {
     )
   );
 }
+
+MyCalendar.propTypes = {
+  showError: PropTypes.bool,
+};
 
 export default MyCalendar;

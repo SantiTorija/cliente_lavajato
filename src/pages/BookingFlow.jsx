@@ -13,10 +13,11 @@ import {
   Button,
   Card,
   Container,
-  Row,
-  Col,
   ProgressBar,
+  Toast,
+  ToastContainer,
 } from "react-bootstrap";
+import { useState } from "react";
 
 const steps = [
   { id: 1, label: "Datos del cliente" },
@@ -28,12 +29,24 @@ const steps = [
 export default function BookingFlow() {
   const reserveStep = useSelector((state) => state.reserveStep);
   const client = useSelector((state) => state.client);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [showToast, setShowToast] = useState(false);
 
   const handlePrev = () => {
     dispatch(prev());
   };
+
   const handleNext = () => {
+    // Verificar si estamos en el paso 2 (Fecha y hora) y si hay fecha y hora seleccionada
+    if (reserveStep === 2) {
+      if (!cart.date || !cart.slot) {
+        // Mostrar toast rojo si no hay fecha y hora seleccionada
+        setShowToast(true);
+        return;
+      }
+    }
+
     dispatch(next());
   };
 
@@ -46,7 +59,7 @@ export default function BookingFlow() {
           <ClientDataForm />
         );
       case 2:
-        return <Calendar />;
+        return <Calendar showError={showToast} />;
       case 3:
         return <Services />;
       case 4:
@@ -99,6 +112,25 @@ export default function BookingFlow() {
           )}
         </Card>
       </Container>
+
+      {/* Toast de Bootstrap */}
+      <ToastContainer position="top-end" className="p-3">
+        <Toast
+          show={showToast}
+          onClose={() => setShowToast(false)}
+          delay={4000}
+          autohide
+          bg="danger"
+        >
+          <Toast.Header closeButton>
+            <strong className="me-auto">¡Atención!</strong>
+          </Toast.Header>
+          <Toast.Body className="text-white">
+            Selecciona una fecha y hora antes de continuar
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
+
       <WhatsappButton />
       <Footer />
     </>
