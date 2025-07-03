@@ -5,9 +5,8 @@ import useFormatDate from "../hooks/useFormatDate";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import styles from "./availableSlot.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoaderOverlay from "./LoaderOverlay";
-import { useEffect } from "react";
 
 const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
   const dispatch = useDispatch();
@@ -37,6 +36,11 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
       setLoading(false);
     }, 250);
   }, [slotsAvailable]);
+
+  useEffect(() => {
+    setSelectedSlot(null);
+  }, [selectedDay]);
+
   const formatDate = useFormatDate(selectedDay);
 
   return (

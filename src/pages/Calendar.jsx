@@ -3,10 +3,11 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import AvailableSlots from "../components/AvailableSlots";
 import useFetchAvailableDays from "../hooks/useFetchAvailability";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Container, Col, Row } from "react-bootstrap";
 import LoaderOverlay from "../components/LoaderOverlay";
 import PropTypes from "prop-types";
+import { emptyDateTime } from "../redux/cartSlice";
 
 function MyCalendar({ showError = false }) {
   const [date] = useState(new Date());
@@ -15,6 +16,7 @@ function MyCalendar({ showError = false }) {
   const [loading, setLoading] = useState(false);
 
   const orders = useSelector((state) => state.orders);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     orders && orders.length > 0;
@@ -67,6 +69,7 @@ function MyCalendar({ showError = false }) {
   };
   // Handle day selection
   const handleDateChange = (newDate) => {
+    dispatch(emptyDateTime());
     setSelectedDay(null);
     const dateKey = newDate.toISOString().split("T")[0];
     setSelectedDay(dateKey);
