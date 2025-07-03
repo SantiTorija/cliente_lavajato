@@ -73,6 +73,63 @@ option{
  padding: none !important;
  margin-top: -2rem;
 }
+
+/* Estilos para la navegación del calendario - soluciona el problema de colores en móvil */
+.react-calendar__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #333 !important;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: #f0f0f0;
+}
+
+.react-calendar__navigation button:disabled {
+  color: #ccc !important;
+  cursor: not-allowed;
+}
+
+.react-calendar__navigation__label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333 !important;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.react-calendar__navigation__label:hover {
+  background-color: #f0f0f0;
+}
+
+/* Forzar colores en móviles */
+@media (max-width: 768px) {
+  .react-calendar__navigation button {
+    color: #333 !important;
+    -webkit-text-fill-color: #333 !important;
+  }
+  
+  .react-calendar__navigation__label {
+    color: #333 !important;
+    -webkit-text-fill-color: #333 !important;
+  }
+}
 .react-calendar__month-view__days {
   display: grid !important;
   grid-template-columns: repeat(7, 1fr) !important;
