@@ -15,6 +15,8 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import useDeleteAlert from "../hooks/useDeleteAlert";
 import useChangeDate from "../hooks/useChangeDate";
 import LoaderOverlay from "../components/LoaderOverlay";
+import useEmailValidation from "../hooks/useEmailValidation";
+import { AiOutlineWarning } from "react-icons/ai";
 
 export default function MisReservas() {
   const [email, setEmail] = useState("");
@@ -25,6 +27,15 @@ export default function MisReservas() {
   const [emailError, setEmailError] = useState("");
   const { handleDelete } = useDeleteAlert();
   const { fetchOrderToEdit, loadingOrderToEdit } = useChangeDate();
+  const emailValidation = useEmailValidation("");
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("client_email");
+    if (savedEmail) {
+      setEmail(savedEmail);
+      emailValidation.updateEmail(savedEmail);
+    }
+  }, []);
 
   // Buscar reservas al hacer click en Buscar
   const handleBuscar = useCallback(() => {
@@ -47,6 +58,8 @@ export default function MisReservas() {
   // Limpiar error de email al cambiar el input
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    localStorage.setItem("client_email", e.target.value);
+    emailValidation.updateEmail(e.target.value);
     if (emailError) setEmailError("");
     setSearchedEmail(""); // Limpiar resultados previos al cambiar email
   };
@@ -66,16 +79,27 @@ export default function MisReservas() {
       <Container className="py-5" style={{ minHeight: "70vh" }}>
         <LoaderOverlay show={loadingOrderToEdit} />
         <h1 className="text-white mb-4">Mis reservas</h1>
-        <InputGroup
-          className={`mb-4 ${styles.inputGroupNoGap}`}
-          style={{ maxWidth: 400 }}
-        >
-          <Form.Control
-            type="email"
-            placeholder="Ingrese email"
-            value={email}
-            onChange={handleEmailChange}
-          />
+        <div className="d-flex align-items-start gap-2">
+          <div style={{ flex: 1 }}>
+            <div className="w-100" style={{ maxWidth: 400 }}>
+              <Form.Group className="mb-0">
+                <Form.Control
+                  className="input-email-responsive"
+                  type="email"
+                  placeholder="Ingrese email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  isInvalid={!emailValidation.isValid && email !== ""}
+                  isValid={emailValidation.isValid && email !== ""}
+                />
+                {email && !emailValidation.isValid && (
+                  <Form.Text className="text-danger d-flex align-items-center gap-1 mt-1">
+                    <AiOutlineWarning /> Formato de email inválido
+                  </Form.Text>
+                )}
+              </Form.Group>
+            </div>
+          </div>
           <Button
             className={styles.btnBuscar}
             onClick={handleBuscar}
@@ -83,7 +107,7 @@ export default function MisReservas() {
           >
             Buscar
           </Button>
-        </InputGroup>
+        </div>
         {emailError && (
           <div style={{ color: "red", marginBottom: 8 }}>{emailError}</div>
         )}

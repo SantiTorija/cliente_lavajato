@@ -72,4 +72,14 @@
 .font {
   color: #222;
   font-size: 0.95rem;
+}
+
+.input-email-responsive {
+  width: 100%;
+  max-width: 400px;
+}
+@media (max-width: 576px) {
+  .input-email-responsive {
+    max-width: 100%;
+  }
 } 
