@@ -31,7 +31,10 @@ const useStoreOrder = (date, slot) => {
       return response;
     } catch (err) {
       setError(err);
-      console.error("Error at storeOrder:", err);
+      if (err.response && err.response.data && err.response.data.error) {
+        return { error: err.response.data.error };
+      }
+      return { error: "Error desconocido" };
     } finally {
       setLoadingStore(false);
     }

@@ -6,13 +6,14 @@ import { useNavigate } from "react-router-dom";
 import useStoreOrder from "../hooks/useStoreOrder";
 import useUpdateOrder from "../hooks/useUpdateOrder";
 import NavbarComponent from "../components/Navbar";
-import { Card, Container, Toast, ToastContainer } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import styles from "./confirmation.module.css";
 import { prev } from "../redux/reserveStepSlice";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
 import LoaderOverlay from "../components/LoaderOverlay";
 import { useState } from "react";
+import useSwalOrderError from "../hooks/useSwalOrderError";
 
 function Confirmation() {
   const { firstname, lastname, email, carType, clientId, carTypeId } =
@@ -23,9 +24,6 @@ function Confirmation() {
   console.log(cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [showToast, setShowToast] = useState(false);
-  const [toastMsg, setToastMsg] = useState("");
 
   const handlePrev = () => {
     dispatch(emptyService());
@@ -38,26 +36,28 @@ function Confirmation() {
   );
   const { updateOrder, loadingUpdate } = useUpdateOrder();
 
-  const handleStoreOrder = async () => {
-    try {
-      await storeOrder({
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        cart: cart,
-        ServiceId: cart.serviceId,
-        ClientId: clientId,
-        CarTypeId: carTypeId,
-      });
+  const showOrderError = useSwalOrderError();
 
-      dispatch(emptyCart());
-      dispatch(setStartStep());
-      navigate("/gracias");
-    } catch (error) {
-      setToastMsg("La hora ya ha sido reservada por otro cliente");
-      setShowToast(true);
-      console.log(error);
+  const handleStoreOrder = async () => {
+    const result = await storeOrder({
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      cart: cart,
+      ServiceId: cart.serviceId,
+      ClientId: clientId,
+      CarTypeId: carTypeId,
+    });
+
+    if (result && result.error) {
+      console.log("Disparando SweetAlert2 con error:", result.error, email);
+      showOrderError(email);
+      return; // No navegar
     }
+
+    dispatch(emptyCart());
+    dispatch(setStartStep());
+    navigate("/gracias");
   };
 
   const handleUpdateOrder = async () => {
@@ -131,20 +131,6 @@ function Confirmation() {
           </button>
         </div>
       </Container>
-      <ToastContainer position="top-end" className="p-3">
-        <Toast
-          show={showToast}
-          onClose={() => setShowToast(false)}
-          delay={4000}
-          autohide
-          bg="danger"
-        >
-          <Toast.Header closeButton>
-            <strong className="me-auto">¡Atención!</strong>
-          </Toast.Header>
-          <Toast.Body className="text-white">{toastMsg}</Toast.Body>
-        </Toast>
-      </ToastContainer>
       <WhatsappButton />
     </>
   );
