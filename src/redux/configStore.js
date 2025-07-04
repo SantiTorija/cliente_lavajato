@@ -4,6 +4,7 @@ import clientSlice from "./clientSlice";
 import orderToEditSlice from "./orderToEditSlice";
 import servicesSlice from "./servicesSlice";
 import resererveStepSlice from "./reserveStepSlice";
+import ordersByStatusReducer from "./ordersByStatusSlice";
 
 import { combineReducers } from "redux";
 import {
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   orders: orderToEditSlice,
   services: servicesSlice,
   reserveStep: resererveStepSlice,
+  ordersByStatus: ordersByStatusReducer,
 });
 
 const persistConfig = {

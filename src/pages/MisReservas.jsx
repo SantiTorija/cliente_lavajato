@@ -1,14 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import NavbarComponent from "../components/Navbar";
 import Footer from "../components/Footer";
-import {
-  Container,
-  Form,
-  InputGroup,
-  Button,
-  Tabs,
-  Tab,
-} from "react-bootstrap";
+import { Container, Form, Button, Tabs, Tab, Toast } from "react-bootstrap";
 import styles from "./misReservas.module.css";
 import useFetchOrdersByStatus from "../hooks/useFetchOrdersByStatus";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -17,17 +10,25 @@ import useChangeDate from "../hooks/useChangeDate";
 import LoaderOverlay from "../components/LoaderOverlay";
 import useEmailValidation from "../hooks/useEmailValidation";
 import { AiOutlineWarning } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 export default function MisReservas() {
   const [email, setEmail] = useState("");
   const [key, setKey] = useState("Active");
   const [searchedEmail, setSearchedEmail] = useState("");
-  const { fetchOrdersByStatus, orders, loading, error } =
-    useFetchOrdersByStatus();
+  const fetchOrdersByStatus = useFetchOrdersByStatus();
+  const { orders, loading, error } = useSelector(
+    (state) => state.ordersByStatus
+  );
   const [emailError, setEmailError] = useState("");
   const { handleDelete } = useDeleteAlert();
   const { fetchOrderToEdit, loadingOrderToEdit } = useChangeDate();
   const emailValidation = useEmailValidation("");
+  const [toast, setToast] = useState({
+    show: false,
+    message: "",
+    variant: "success",
+  });
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("client_email");
@@ -80,26 +81,25 @@ export default function MisReservas() {
         <LoaderOverlay show={loadingOrderToEdit} />
         <h1 className="text-white mb-4">Mis reservas</h1>
         <div className="d-flex align-items-start gap-2">
-          <div style={{ flex: 1 }}>
-            <div className="w-100" style={{ maxWidth: 400 }}>
-              <Form.Group className="mb-0">
-                <Form.Control
-                  className="input-email-responsive"
-                  type="email"
-                  placeholder="Ingrese email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  isInvalid={!emailValidation.isValid && email !== ""}
-                  isValid={emailValidation.isValid && email !== ""}
-                />
-                {email && !emailValidation.isValid && (
-                  <Form.Text className="text-danger d-flex align-items-center gap-1 mt-1">
-                    <AiOutlineWarning /> Formato de email inválido
-                  </Form.Text>
-                )}
-              </Form.Group>
-            </div>
+          <div className="w-100" style={{ maxWidth: 400 }}>
+            <Form.Group className="mb-0">
+              <Form.Control
+                className="input-email-responsive"
+                type="email"
+                placeholder="Ingrese email"
+                value={email}
+                onChange={handleEmailChange}
+                isInvalid={!emailValidation.isValid && email !== ""}
+                isValid={emailValidation.isValid && email !== ""}
+              />
+              {email && !emailValidation.isValid && (
+                <Form.Text className="text-danger d-flex align-items-center gap-1 mt-1">
+                  <AiOutlineWarning /> Formato de email inválido
+                </Form.Text>
+              )}
+            </Form.Group>
           </div>
+
           <Button
             className={styles.btnBuscar}
             onClick={handleBuscar}
@@ -178,7 +178,8 @@ export default function MisReservas() {
                                 handleDelete(
                                   order.id,
                                   order.cart.date,
-                                  order.cart.slot
+                                  order.cart.slot,
+                                  setToast
                                 )
                               }
                             >
@@ -244,7 +245,14 @@ export default function MisReservas() {
                             <button
                               className="btn btn-outline-danger btn-sm"
                               title="Eliminar"
-                              onClick={() => handleDelete(order.id)}
+                              onClick={() =>
+                                handleDelete(
+                                  order.id,
+                                  order.cart.date,
+                                  order.cart.slot,
+                                  setToast
+                                )
+                              }
                             >
                               <FaTrash />
                             </button>
@@ -259,6 +267,16 @@ export default function MisReservas() {
           </Tabs>
         </div>
       </Container>
+      <Toast
+        onClose={() => setToast({ ...toast, show: false })}
+        show={toast.show}
+        delay={3000}
+        autohide
+        bg={toast.variant}
+        style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}
+      >
+        <Toast.Body className="text-white">{toast.message}</Toast.Body>
+      </Toast>
       <Footer />
     </>
   );
