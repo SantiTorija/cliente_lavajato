@@ -14,7 +14,7 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
   const [loading, setLoading] = useState(false);
   const [filteredSlots, setFilteredSlots] = useState([]);
 
-  const slot = ["8:30 a.m.", "10:30 a.m.", "1:30 p.m.", "3:30 p.m."];
+  const slot = ["8:30 a.m.", "10:30 a.m.", "2:30 p.m.", "4:30 p.m."];
 
   const handleSelectSlot = (timeSlot) => {
     setSelectedSlot(timeSlot);
