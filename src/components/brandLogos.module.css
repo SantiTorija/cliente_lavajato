@@ -1,29 +1,33 @@
 .brandLogosWrapper {
-
   background-color: white;
   overflow: hidden;
   position: relative;
   width: 100%;
   height: 6rem;
-   /* Ajustá según tamaño de logos */
+  /* Ajustá según tamaño de logos */
 }
 
 .brandLogosTrack {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: max-content;
-  animation: scroll 30s linear infinite;
+  animation: scroll 40s linear infinite;
+  /* Aumenté el tiempo para que sea más suave con más logos */
 }
 
 .logoItem {
   flex: 0 0 auto;
-  margin: 0 30px; /* Espacio entre logos */
+  margin: 0 20px; /* Reduje el espacio entre logos */
+  min-width: 120px; /* Ancho mínimo para evitar que se compriman */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo {
-  height: 100px;
+  height: 90px; /* Reduje un poco la altura */
   width: auto;
+  max-width: 100px; /* Ancho máximo para consistencia */
   object-fit: contain;
 }
 
@@ -34,4 +38,9 @@
   100% {
     transform: translateX(-50%);
   }
+}
+
+/* Pausar animación en hover para mejor UX */
+.brandLogosWrapper:hover .brandLogosTrack {
+  animation-play-state: paused;
 }
