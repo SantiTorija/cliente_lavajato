@@ -22,7 +22,7 @@ function ThankYou() {
     dispatch(emptyOrderToEdit());
     setTimeout(() => {
       setLoading(false);
-      navigate("/");
+      window.location.href = "/";
     }, 250);
   };
 
