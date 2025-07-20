@@ -407,11 +407,12 @@ const ConfirmClientDataForm = () => {
                       (editingField && editingField !== "carType")
                     }
                   >
-                    <option value="" disabled>
-                      Selecciona un tipo de auto
-                    </option>
                     {carTypes.map((option) => (
-                      <option key={option.id} value={option.id}>
+                      <option
+                        style={{ color: "black" }}
+                        key={option.id}
+                        value={option.id}
+                      >
                         {option.name}
                       </option>
                     ))}
