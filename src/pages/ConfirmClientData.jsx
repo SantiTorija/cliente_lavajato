@@ -77,7 +77,7 @@ const ConfirmClientDataForm = () => {
     try {
       let updatedClient;
       if (field === "carType") {
-        console.log(value.name);
+        console.log(value);
         console.log(value.id);
         setLocalCarType(value.name);
         setLocalCarTypeId(value.id);
