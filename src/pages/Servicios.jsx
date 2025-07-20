@@ -9,27 +9,64 @@ import chapa from "../assets/images/blackcar.png";
 import WhatsappButton from "../components/WhatsappButton";
 import BrandLogos from "../components/BrandLogos";
 
-// Array de logos de ejemplo
+// Importar logos locales
+import repsol from "../assets/images/logos/repsol.jpg";
+import millard from "../assets/images/logos/bse.jpg";
+import bridgestone from "../assets/images/logos/bridgestone.jpg";
+import winda from "../assets/images/logos/winda.jpg";
+import continental from "../assets/images/logos/contnental.jpg";
+import sancor from "../assets/images/logos/sancor.jpg";
+import sura from "../assets/images/logos/sura.jpg";
+import sanCristobal from "../assets/images/logos/san_cristobal.jpg";
+import surco from "../assets/images/logos/surco.jpg";
+import wurth from "../assets/images/logos/wurth.jpg";
+import hdiSeguros from "../assets/images/logos/hdi-seguros.jpg";
+
+// Array de logos usando importaciones locales
 const brandLogos = [
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Repsol_logo.svg/2560px-Repsol_logo.svg.png",
+    src: repsol,
     alt: "Repsol",
   },
   {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStX4VdEbAvRph8wXbll7vQV0GwiriWfHroxg&s",
-    alt: "millard",
+    src: millard,
+    alt: "BSE",
   },
   {
-    src: "https://www.shutterstock.com/image-vector/bridgestone-logo-sign-icon-emblem-600nw-2286811601.jpg",
+    src: bridgestone,
     alt: "Bridgestone",
   },
   {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnnS3zC8qV2UJnqMY1sz2S-9EcHJlU0lVirQ&s",
+    src: winda,
     alt: "Winda",
   },
   {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNHbXRxyYG8jEADYMqrCqndW4irkx7vUP6UA&s",
+    src: continental,
     alt: "Continental",
+  },
+  {
+    src: sancor,
+    alt: "Sancor",
+  },
+  {
+    src: sura,
+    alt: "Sura",
+  },
+  {
+    src: sanCristobal,
+    alt: "San Cristóbal",
+  },
+  {
+    src: surco,
+    alt: "Surco",
+  },
+  {
+    src: wurth,
+    alt: "Wurth",
+  },
+  {
+    src: hdiSeguros,
+    alt: "HDI Seguros",
   },
 ];
 
