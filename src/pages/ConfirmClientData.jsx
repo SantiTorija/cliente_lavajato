@@ -47,6 +47,14 @@ const ConfirmClientDataForm = () => {
     }
   }, [carTypes, localCarType]);
 
+  // Sincronizar estado local con Redux store
+  useEffect(() => {
+    setLocalPhone(phone ? phone.replace(/^\+\d{1,3}/, "") : "");
+    setLocalMarca(marca || "");
+    setLocalModelo(modelo || "");
+    setLocalCarType(carType || "");
+  }, [phone, marca, modelo, carType]);
+
   // Handler para el select de carType
   const handleCarTypeChange = (e) => {
     const selectedId = Number(e.target.value);
@@ -78,11 +86,22 @@ const ConfirmClientDataForm = () => {
         });
         dispatch(updateClientField({ field: "carType", value: value.name }));
         dispatch(updateClientField({ field: "carTypeId", value: value.id }));
+        // Actualizar estado local inmediatamente
+        setLocalCarType(value.name);
+        setLocalCarTypeId(value.id);
       } else {
         updatedClient = await updateClientAPI(clientId, field, value, {
           countryCode: field === "phone" ? countryCode : undefined,
         });
         dispatch(updateClientField({ field, value }));
+        // Actualizar estado local para otros campos
+        if (field === "phone") {
+          setLocalPhone(value);
+        } else if (field === "marca") {
+          setLocalMarca(value);
+        } else if (field === "modelo") {
+          setLocalModelo(value);
+        }
       }
       setEditingField(null);
       setToastMessage(`${getFieldDisplayName(field)} actualizado exitosamente`);
@@ -407,12 +426,11 @@ const ConfirmClientDataForm = () => {
                       (editingField && editingField !== "carType")
                     }
                   >
+                    <option value="" disabled>
+                      Selecciona un tipo de auto
+                    </option>
                     {carTypes.map((option) => (
-                      <option
-                        style={{ color: "black" }}
-                        key={option.id}
-                        value={option.id}
-                      >
+                      <option key={option.id} value={option.id}>
                         {option.name}
                       </option>
                     ))}
