@@ -53,6 +53,7 @@ const ConfirmClientDataForm = () => {
 
   // Handler para el select de carType
   const handleCarTypeChange = (e) => {
+    console.log("entre");
     const selectedId = Number(e.target.value);
     setLocalCarTypeId(selectedId);
     const found = carTypes.find((ct) => ct.id === selectedId);
@@ -408,7 +409,7 @@ const ConfirmClientDataForm = () => {
                 <>
                   <Form.Select
                     value={localCarTypeId || ""}
-                    onChange={handleCarTypeChange}
+                    onChange={(e) => handleCarTypeChange(e)}
                     autoFocus
                     className={`${styles.readOnlyField} ${
                       editingField === "carType"
