@@ -25,7 +25,7 @@ const ConfirmClientDataForm = () => {
   );
   const [localMarca, setLocalMarca] = useState(marca || "");
   const [localModelo, setLocalModelo] = useState(modelo || "");
-  const [localCarType, setLocalCarType] = useState(carType || "");
+  const [localCarType, setLocalCarType] = useState(carType);
   const [localCarTypeId, setLocalCarTypeId] = useState(null);
   const [countryCode, setCountryCode] = useState("+598");
 
@@ -77,6 +77,7 @@ const ConfirmClientDataForm = () => {
     try {
       let updatedClient;
       if (field === "carType") {
+        console.log(value.name);
         setLocalCarType(value.name);
         setLocalCarTypeId(value.id);
         updatedClient = await updateClientAPI(clientId, field, value.name, {
@@ -461,8 +462,7 @@ const ConfirmClientDataForm = () => {
                 <>
                   <Form.Control
                     type="text"
-                    value={localCarType}
-                    placeholder={localCarType}
+                    value={carType}
                     readOnly
                     className={`${styles.readOnlyField} ${
                       editingField && editingField !== "carType"
