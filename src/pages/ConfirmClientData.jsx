@@ -426,11 +426,12 @@ const ConfirmClientDataForm = () => {
                       (editingField && editingField !== "carType")
                     }
                   >
-                    {carTypes.map((option) => (
-                      <option key={option.id} value={option.id}>
-                        {option.name}
-                      </option>
-                    ))}
+                    {carTypes &&
+                      carTypes.map((option) => (
+                        <option key={option.id} value={option.id}>
+                          {option.name}
+                        </option>
+                      ))}
                   </Form.Select>
                   <button
                     type="button"
