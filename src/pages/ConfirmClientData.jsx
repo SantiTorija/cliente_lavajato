@@ -426,9 +426,6 @@ const ConfirmClientDataForm = () => {
                       (editingField && editingField !== "carType")
                     }
                   >
-                    <option value="" disabled>
-                      Selecciona un tipo de auto
-                    </option>
                     {carTypes.map((option) => (
                       <option key={option.id} value={option.id}>
                         {option.name}
@@ -469,18 +466,24 @@ const ConfirmClientDataForm = () => {
                     value={localCarType}
                     readOnly
                     className={`${styles.readOnlyField} ${
-                      editingField ? styles.disabledField : ""
+                      editingField && editingField !== "carType"
+                        ? styles.disabledField
+                        : ""
                     }`}
-                    disabled={!!editingField}
+                    disabled={editingField && editingField !== "carType"}
                   />
                   <button
                     type="button"
                     className={`${styles.editButton} ${styles.edit} ${
-                      editingField ? styles.disabledField : ""
+                      editingField && editingField !== "carType"
+                        ? styles.disabledField
+                        : ""
                     }`}
                     onClick={() => setEditingField("carType")}
                     title="Editar"
-                    disabled={loading || !!editingField}
+                    disabled={
+                      loading || (editingField && editingField !== "carType")
+                    }
                   >
                     <MdModeEditOutline />
                   </button>

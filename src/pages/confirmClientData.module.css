@@ -126,8 +126,8 @@
 
 .disabledField {
   background: #f3f4f6 !important;
-  color: #a1a1aa !important;
-  opacity: 1 !important;
+  color: #6b7280 !important; /* Cambié de #a1a1aa a un gris más visible */
+  opacity: 0.7 !important; /* Reduje la opacidad en lugar de hacer el texto invisible */
   cursor: not-allowed !important;
   border-color: #e5e7eb !important;
 } 
