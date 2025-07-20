@@ -462,7 +462,7 @@ const ConfirmClientDataForm = () => {
                 <>
                   <Form.Control
                     type="text"
-                    value={carType}
+                    value={localCarType}
                     readOnly
                     className={`${styles.readOnlyField} ${
                       editingField && editingField !== "carType"
