@@ -44,7 +44,7 @@
   padding: 0.375rem 0.75rem;
   padding-right: 3rem; /* Espacio para el botón */
   box-shadow: none;
-  color: #495057;
+  color: #000000;
   position: relative;
   transition: all 0.2s ease;
 }

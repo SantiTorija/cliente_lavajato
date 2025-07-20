@@ -19,7 +19,6 @@ const ConfirmClientDataForm = () => {
     (state) => state.client
   );
 
-  // Estados para edición
   const [editingField, setEditingField] = useState(null);
   const [localPhone, setLocalPhone] = useState(
     phone ? phone.replace(/^\+\d{1,3}/, "") : ""
@@ -30,15 +29,12 @@ const ConfirmClientDataForm = () => {
   const [localCarTypeId, setLocalCarTypeId] = useState(null);
   const [countryCode, setCountryCode] = useState("+598");
 
-  // Estados para toasts
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-  // Hook para actualizar cliente
   const { updateClientField: updateClientAPI, loading } = useUpdateClient();
   const { carTypes, loading: loadingCarTypes } = useFetchCarTypes();
-
   // Sincronizar carTypeId si cambia el nombre (por ejemplo, al cargar datos)
   useEffect(() => {
     if (carTypes.length && localCarType) {
@@ -86,7 +82,6 @@ const ConfirmClientDataForm = () => {
         });
         dispatch(updateClientField({ field: "carType", value: value.name }));
         dispatch(updateClientField({ field: "carTypeId", value: value.id }));
-        // Actualizar estado local inmediatamente
         setLocalCarType(value.name);
         setLocalCarTypeId(value.id);
       } else {
@@ -94,7 +89,6 @@ const ConfirmClientDataForm = () => {
           countryCode: field === "phone" ? countryCode : undefined,
         });
         dispatch(updateClientField({ field, value }));
-        // Actualizar estado local para otros campos
         if (field === "phone") {
           setLocalPhone(value);
         } else if (field === "marca") {
@@ -395,11 +389,9 @@ const ConfirmClientDataForm = () => {
       <Container className={styles.formContainer}>
         <Form className={styles.form} onSubmit={handleSubmit}>
           <h2>Bienvenido {firstname}</h2>
-
           <span>
             Por favor, confirme que los siguientes datos sean correctos
           </span>
-
           {renderPhoneField()}
 
           {renderEditableField("marca", localMarca, setLocalMarca, "Marca")}
@@ -466,34 +458,37 @@ const ConfirmClientDataForm = () => {
                   </button>
                 </>
               ) : (
-                <>
-                  <Form.Control
-                    type="text"
-                    value={localCarType}
-                    readOnly
-                    className={`${styles.readOnlyField} ${
-                      editingField && editingField !== "carType"
-                        ? styles.disabledField
-                        : ""
-                    }`}
-                    disabled={editingField && editingField !== "carType"}
-                  />
-                  <button
-                    type="button"
-                    className={`${styles.editButton} ${styles.edit} ${
-                      editingField && editingField !== "carType"
-                        ? styles.disabledField
-                        : ""
-                    }`}
-                    onClick={() => setEditingField("carType")}
-                    title="Editar"
-                    disabled={
-                      loading || (editingField && editingField !== "carType")
-                    }
-                  >
-                    <MdModeEditOutline />
-                  </button>
-                </>
+                localCarType && (
+                  <>
+                    <Form.Control
+                      type="text"
+                      value={localCarType}
+                      placeholder={localCarType}
+                      readOnly
+                      className={`${styles.readOnlyField} ${
+                        editingField && editingField !== "carType"
+                          ? styles.disabledField
+                          : ""
+                      }`}
+                      disabled={editingField && editingField !== "carType"}
+                    />
+                    <button
+                      type="button"
+                      className={`${styles.editButton} ${styles.edit} ${
+                        editingField && editingField !== "carType"
+                          ? styles.disabledField
+                          : ""
+                      }`}
+                      onClick={() => setEditingField("carType")}
+                      title="Editar"
+                      disabled={
+                        loading || (editingField && editingField !== "carType")
+                      }
+                    >
+                      <MdModeEditOutline />
+                    </button>
+                  </>
+                )
               )}
             </div>
           </Form.Group>
