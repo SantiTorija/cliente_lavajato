@@ -78,6 +78,7 @@ const ConfirmClientDataForm = () => {
       let updatedClient;
       if (field === "carType") {
         console.log(value.name);
+        console.log(value.id);
         setLocalCarType(value.name);
         setLocalCarTypeId(value.id);
         updatedClient = await updateClientAPI(clientId, field, value.name, {
