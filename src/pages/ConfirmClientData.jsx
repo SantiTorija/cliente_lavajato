@@ -55,6 +55,7 @@ const ConfirmClientDataForm = () => {
   const handleCarTypeChange = (e) => {
     console.log("entre");
     const selectedId = Number(e.target.value);
+    console.log(selectedId);
     setLocalCarTypeId(selectedId);
     const found = carTypes.find((ct) => ct.id === selectedId);
     console.log(found);
