@@ -427,7 +427,6 @@ const ConfirmClientDataForm = () => {
                           value={option.id}
                           placeholder={option.name}
                         >
-                          {console.log(option.name)}
                           {option.name}
                         </option>
                       ))}
