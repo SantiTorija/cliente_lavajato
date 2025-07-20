@@ -13,11 +13,12 @@
 }
 
 .warning{
-  border: 1px solid rgba(255, 0, 0, 0.431);
+  border: 2px solid rgba(255, 255, 0, 0.431);
   border-radius: 10px;
   padding: .5rem;
   text-align: justify;
   font-size: .8rem;
+  font-weight: 600;
 }
 
 .card{   

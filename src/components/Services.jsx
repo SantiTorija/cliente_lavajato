@@ -116,9 +116,9 @@ const Services = () => {
                 Debe seleccionar al menos un servicio para continuar.
               </div>
             )}
-            <p className={styles.disclaimerFont}>
-              Atención:
-              <br /> Si al momento de la visita se determina que la categoría
+            <p className={`${styles.disclaimerFont} text-justify`}>
+              <div className="text-center mb-2 fs-5">⚠️</div>
+              Si al momento de la visita se determina que la categoría
               seleccionada no corresponde al tamaño o tipo real del vehículo, se
               ajustará el precio del servicio para reflejar adecuadamente el
               tamaño y tipo correctos.

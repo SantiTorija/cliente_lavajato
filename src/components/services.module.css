@@ -14,12 +14,13 @@
   
 
   .disclaimerFont{
-    border: 1px solid rgb(171, 34, 34);
-    padding: 1rem;
-    text-align: justify;
-    margin-top: 1rem;
-    font-size: 0.8rem;
+    border: 2px solid rgba(255, 255, 0, 0.431);
     border-radius: 10px;
+    padding: .5rem;
+    text-align: justify;
+    font-size: .8rem;
+    font-weight: 600;
+    margin: 0 1rem;
   }
   .serviceFont{
     font-size: 1rem;

@@ -14,6 +14,7 @@ import WhatsappButton from "../components/WhatsappButton";
 import LoaderOverlay from "../components/LoaderOverlay";
 import { useState } from "react";
 import useSwalOrderError from "../hooks/useSwalOrderError";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 function Confirmation() {
   const { firstname, lastname, email, carType, clientId, carTypeId } =
@@ -110,11 +111,11 @@ function Confirmation() {
               Total <span className="text-primary"> ${cart.total}</span>
             </span>
           </Card.Body>
-          <p className={styles.warning}>
-            Atención: <br />
-            Esta reserva se podrá cancelar con 24 horas de anticipación como
-            mínimo. En caso de no presentarse se efectuará un recargo del 30% en
-            su próxima reserva
+          <p className={`${styles.warning} text-justify`}>
+            <div className="text-center mb-2 fs-5">⚠️</div>
+            Esta reserva se podrá modificar o cancelar hasta 24 hs previas a la
+            misma. En caso de no poder asistir por favor recordá hacerlo. Es
+            importante para poder brindar un mejor servicio.
           </p>
         </Card>
         <div className="d-flex justify-content-center gap-2 mt-4 w-100">
