@@ -428,7 +428,12 @@ const ConfirmClientDataForm = () => {
                   >
                     {carTypes &&
                       carTypes.map((option) => (
-                        <option key={option.id} value={option.id}>
+                        <option
+                          key={option.id}
+                          value={option.id}
+                          placeholder={option.name}
+                        >
+                          {console.log(option.name)}
                           {option.name}
                         </option>
                       ))}
