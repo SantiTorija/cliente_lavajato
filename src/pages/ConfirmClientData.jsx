@@ -56,6 +56,8 @@ const ConfirmClientDataForm = () => {
     const selectedId = Number(e.target.value);
     setLocalCarTypeId(selectedId);
     const found = carTypes.find((ct) => ct.id === selectedId);
+    console.log(found);
+    console.log(carTypes);
     setLocalCarType(found ? found.name : "");
   };
 
