@@ -77,13 +77,13 @@ const ConfirmClientDataForm = () => {
     try {
       let updatedClient;
       if (field === "carType") {
+        setLocalCarType(value.name);
+        setLocalCarTypeId(value.id);
         updatedClient = await updateClientAPI(clientId, field, value.name, {
           carTypeId: value.id,
         });
         dispatch(updateClientField({ field: "carType", value: value.name }));
         dispatch(updateClientField({ field: "carTypeId", value: value.id }));
-        setLocalCarType(value.name);
-        setLocalCarTypeId(value.id);
       } else {
         updatedClient = await updateClientAPI(clientId, field, value, {
           countryCode: field === "phone" ? countryCode : undefined,
@@ -457,38 +457,38 @@ const ConfirmClientDataForm = () => {
                     )}
                   </button>
                 </>
+              ) : localCarType ? (
+                <>
+                  <Form.Control
+                    type="text"
+                    value={localCarType}
+                    placeholder={localCarType}
+                    readOnly
+                    className={`${styles.readOnlyField} ${
+                      editingField && editingField !== "carType"
+                        ? styles.disabledField
+                        : ""
+                    }`}
+                    disabled={editingField && editingField !== "carType"}
+                  />
+                  <button
+                    type="button"
+                    className={`${styles.editButton} ${styles.edit} ${
+                      editingField && editingField !== "carType"
+                        ? styles.disabledField
+                        : ""
+                    }`}
+                    onClick={() => setEditingField("carType")}
+                    title="Editar"
+                    disabled={
+                      loading || (editingField && editingField !== "carType")
+                    }
+                  >
+                    <MdModeEditOutline />
+                  </button>
+                </>
               ) : (
-                localCarType && (
-                  <>
-                    <Form.Control
-                      type="text"
-                      value={localCarType}
-                      placeholder={localCarType}
-                      readOnly
-                      className={`${styles.readOnlyField} ${
-                        editingField && editingField !== "carType"
-                          ? styles.disabledField
-                          : ""
-                      }`}
-                      disabled={editingField && editingField !== "carType"}
-                    />
-                    <button
-                      type="button"
-                      className={`${styles.editButton} ${styles.edit} ${
-                        editingField && editingField !== "carType"
-                          ? styles.disabledField
-                          : ""
-                      }`}
-                      onClick={() => setEditingField("carType")}
-                      title="Editar"
-                      disabled={
-                        loading || (editingField && editingField !== "carType")
-                      }
-                    >
-                      <MdModeEditOutline />
-                    </button>
-                  </>
-                )
+                "cargando..."
               )}
             </div>
           </Form.Group>
