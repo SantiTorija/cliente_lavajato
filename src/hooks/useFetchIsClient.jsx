@@ -32,6 +32,10 @@ const verifyEmailExists = (email) => {
 const useIsClient = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const [futureOrders, setFutureOrders] = useState([]);
+  const [clientData, setClientData] = useState(null);
+  const [pendingEmail, setPendingEmail] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -52,7 +56,15 @@ const useIsClient = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/client/${email.trim()}`
       );
-      console.log(response.data);
+      if (response.data && response.data.futureOrders) {
+        setFutureOrders(response.data.orders || []);
+        setClientData(response.data);
+        setPendingEmail(email);
+        setShowAlert(true);
+        setLoading(false);
+        return;
+      }
+      // Si no hay futureOrders, continuar como antes
       if (response.data) {
         dispatch(addClient(response.data));
         navigate(`/reservas/${email}`);
@@ -67,7 +79,25 @@ const useIsClient = () => {
     }
   };
 
-  return { fetchIsClient, loading, error };
+  // Handler para el SweetAlert personalizado
+  const handleAlertDecision = (advance) => {
+    setShowAlert(false);
+    if (advance && clientData && pendingEmail) {
+      dispatch(addClient(clientData));
+      navigate(`/reservas/${pendingEmail}`);
+    } else {
+      navigate("/");
+    }
+  };
+
+  return {
+    fetchIsClient,
+    loading,
+    error,
+    showAlert,
+    futureOrders,
+    handleAlertDecision,
+  };
 };
 
 export default useIsClient;

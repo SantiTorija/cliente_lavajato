@@ -5,6 +5,7 @@ import useEmailValidation from "../hooks/useEmailValidation";
 import { AiOutlineWarning } from "react-icons/ai";
 //import styles from "./emailModal.module.css";
 import LoaderOverlay from "../components/LoaderOverlay";
+import FutureOrdersAlert from "./FutureOrdersAlert";
 
 function EmailModal(props) {
   const [showToast, setShowToast] = useState(false);
@@ -32,7 +33,14 @@ function EmailModal(props) {
     emailHook.email !== confirmEmailHook.email;
   const bothEmailsValid = emailHook.isValid && confirmEmailHook.isValid;
 
-  const { fetchIsClient, loading, error } = useIsClient();
+  const {
+    fetchIsClient,
+    loading,
+    error,
+    showAlert,
+    futureOrders,
+    handleAlertDecision,
+  } = useIsClient();
 
   const handleNext = () => {
     if (!emailsMatch) {
@@ -54,6 +62,11 @@ function EmailModal(props) {
   return (
     <Container>
       <LoaderOverlay show={loading} />
+      <FutureOrdersAlert
+        show={showAlert}
+        orders={futureOrders}
+        onDecision={handleAlertDecision}
+      />
       <Modal
         {...props}
         size="md"
