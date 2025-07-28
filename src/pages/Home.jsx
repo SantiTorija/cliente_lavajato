@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import NavbarComponent from "../components/Navbar";
 import styles from "./home.module.css";
 import { Container, Row } from "react-bootstrap";
@@ -7,10 +8,19 @@ import EmailModal from "../components/EmailModal.jsx";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
 import { Link } from "react-router-dom";
+import { emptyCart } from "../redux/cartSlice.js";
+import { setStartStep } from "../redux/reserveStepSlice.js";
 
 function Home() {
+  const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
   const [emailModalShow, setEmailModalShow] = useState(false);
+
+  // Limpiar estados de Redux cuando se navega a Home
+  useEffect(() => {
+    dispatch(emptyCart());
+    dispatch(setStartStep());
+  }, [dispatch]);
 
   return (
     <>

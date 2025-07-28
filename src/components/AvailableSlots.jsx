@@ -1,9 +1,7 @@
 import { useDispatch } from "react-redux";
 import { addDateAndTime, emptyDateTime } from "../redux/cartSlice";
-import { next, prev } from "../redux/reserveStepSlice";
 import useFormatDate from "../hooks/useFormatDate";
 import PropTypes from "prop-types";
-import { Button } from "react-bootstrap";
 import styles from "./availableSlot.module.css";
 import { useState, useEffect } from "react";
 import LoaderOverlay from "./LoaderOverlay";
@@ -14,16 +12,12 @@ const AvailableSlots = ({ slotsAvailable, selectedDay }) => {
   const [loading, setLoading] = useState(false);
   const [filteredSlots, setFilteredSlots] = useState([]);
 
-  const slot = ["8:30 a.m.", "10:30 a.m.", "2:00 p.m.", "4:00 p.m."];
+  const slot = ["08:30", "10:30", "14:00", "16:00"];
 
   const handleSelectSlot = (timeSlot) => {
     setSelectedSlot(timeSlot);
     dispatch(emptyDateTime());
     dispatch(addDateAndTime({ date: selectedDay, slot: timeSlot }));
-  };
-
-  const handlePrev = () => {
-    dispatch(prev());
   };
 
   /* function slotsToShow(slot, ocupados) {
