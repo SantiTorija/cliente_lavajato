@@ -101,23 +101,13 @@ function MyCalendar({ showError = false }) {
     return classes.join(" ");
   };
 
-  // Función para obtener la hora actual en Uruguay
-  const getUruguayHour = () => {
-    const now = new Date();
-    // Obtener la hora en Montevideo (GMT-3)
-    const uruguayTime = new Date(
-      now.toLocaleString("en-US", { timeZone: "America/Montevideo" })
-    );
-    return uruguayTime.getHours();
-  };
-
   const disableSundays = ({ date, view }) => {
     // Solo deshabilitar en la vista de mes
     if (view === "month") {
       // Deshabilitar si el día es sábado (6) o domingo (0)
       if (date.getDay() === 0 || date.getDay() === 6) return true;
 
-      // Deshabilitar el día actual si en Uruguay son las 14:00 o más
+      // Deshabilitar el día actual
       const today = new Date();
       const uruguayTime = new Date(
         today.toLocaleString("en-US", { timeZone: "America/Montevideo" })
@@ -126,7 +116,8 @@ function MyCalendar({ showError = false }) {
         date.getDate() === uruguayTime.getDate() &&
         date.getMonth() === uruguayTime.getMonth() &&
         date.getFullYear() === uruguayTime.getFullYear();
-      if (isToday && uruguayTime.getHours() >= 14) return true;
+
+      if (isToday) return true;
     }
     return false;
   };
