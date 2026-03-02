@@ -1,10 +1,15 @@
 .brandLogosWrapper {
-  background-color: white;
+  background: rgba(255, 255, 255, 0.05);
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 6rem;
-  /* Ajustá según tamaño de logos */
+  min-height: 6rem;
+  height: 7.2rem;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .brandLogosTrack {
@@ -12,23 +17,31 @@
   align-items: center;
   width: max-content;
   animation: scroll 40s linear infinite;
-  /* Aumenté el tiempo para que sea más suave con más logos */
+}
+
+.brandLogosWrapper.paused .brandLogosTrack {
+  animation-play-state: paused;
 }
 
 .logoItem {
   flex: 0 0 auto;
-  margin: 0 20px; /* Reduje el espacio entre logos */
-  min-width: 120px; /* Ancho mínimo para evitar que se compriman */
+  margin: 0 20px;
+  min-width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .logo {
-  height: 90px; /* Reduje un poco la altura */
+  height: 92px;
   width: auto;
-  max-width: 100px; /* Ancho máximo para consistencia */
+  max-width: 119px;
   object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.logoItem:hover .logo {
+  transform: scale(1.05);
 }
 
 @keyframes scroll {
@@ -43,4 +56,29 @@
 /* Pausar animación en hover para mejor UX */
 .brandLogosWrapper:hover .brandLogosTrack {
   animation-play-state: paused;
+}
+
+/* Accesibilidad: respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .brandLogosTrack {
+    animation: scroll 120s linear infinite;
+  }
+}
+
+/* Responsive: móvil */
+@media (max-width: 576px) {
+  .brandLogosWrapper {
+    min-height: 4.8rem;
+    height: 6rem;
+  }
+
+  .logoItem {
+    min-width: 96px;
+    margin: 0 16px;
+  }
+
+  .logo {
+    height: 66px;
+    max-width: 92px;
+  }
 }

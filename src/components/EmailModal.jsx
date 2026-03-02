@@ -6,6 +6,7 @@ import { AiOutlineWarning } from "react-icons/ai";
 //import styles from "./emailModal.module.css";
 import LoaderOverlay from "../components/LoaderOverlay";
 import FutureOrdersAlert from "./FutureOrdersAlert";
+import VetadoDialog from "./VetadoDialog";
 
 function EmailModal(props) {
   const [showToast, setShowToast] = useState(false);
@@ -38,9 +39,17 @@ function EmailModal(props) {
     loading,
     error,
     showAlert,
+    showVetadoDialog,
+    setShowVetadoDialog,
     futureOrders,
     handleAlertDecision,
   } = useIsClient();
+
+  useEffect(() => {
+    if (showVetadoDialog && props.onHide) {
+      props.onHide();
+    }
+  }, [showVetadoDialog]);
 
   const handleNext = () => {
     if (!emailsMatch) {
@@ -66,6 +75,10 @@ function EmailModal(props) {
         show={showAlert}
         orders={futureOrders}
         onDecision={handleAlertDecision}
+      />
+      <VetadoDialog
+        show={showVetadoDialog}
+        onClose={() => setShowVetadoDialog(false)}
       />
       <Modal
         {...props}

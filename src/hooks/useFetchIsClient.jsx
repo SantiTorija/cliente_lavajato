@@ -33,6 +33,7 @@ const useIsClient = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [showVetadoDialog, setShowVetadoDialog] = useState(false);
   const [futureOrders, setFutureOrders] = useState([]);
   const [clientData, setClientData] = useState(null);
   const [pendingEmail, setPendingEmail] = useState("");
@@ -56,6 +57,13 @@ const useIsClient = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/client/${email.trim()}`
       );
+
+      if (response.data && response.data.clientStatus === "vetado") {
+        setShowVetadoDialog(true);
+        setLoading(false);
+        return;
+      }
+
       if (response.data && response.data.futureOrders) {
         setFutureOrders(response.data.orders || []);
         setClientData(response.data);
@@ -95,6 +103,8 @@ const useIsClient = () => {
     loading,
     error,
     showAlert,
+    showVetadoDialog,
+    setShowVetadoDialog,
     futureOrders,
     handleAlertDecision,
   };

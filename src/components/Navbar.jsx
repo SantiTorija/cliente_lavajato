@@ -10,7 +10,7 @@ import { emptyOrderToEdit } from "../redux/orderToEditSlice";
 import { setStartStep } from "../redux/reserveStepSlice";
 import { useEffect, useState } from "react";
 
-function NavbarComponent() {
+function NavbarComponent({ onReservarClick }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -95,7 +95,7 @@ function NavbarComponent() {
                 {location.pathname === "/" && (
                   <button
                     className={`d-none d-md-inline-block ${styles.reserveBtn}`}
-                    onClick={() => navigate("/")}
+                    onClick={onReservarClick || (() => navigate("/"))}
                     type="button"
                   >
                     Reservar

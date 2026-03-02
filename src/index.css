@@ -1,5 +1,9 @@
+html {
+  font-family: 'Montserrat', sans-serif;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -40,6 +44,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100%;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1 {

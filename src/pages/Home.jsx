@@ -24,7 +24,7 @@ function Home() {
 
   return (
     <>
-      <NavbarComponent />
+      <NavbarComponent onReservarClick={() => setEmailModalShow(true)} />
       <Container fluid className={styles.container}>
         <Row className=" px-5 h-100 d-flex flex-column align-items-center justify-content-center text-center">
           <h2 className={`${styles.title} d-block  mb-4`}>Bienvenido</h2>

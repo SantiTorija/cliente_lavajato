@@ -1,12 +1,33 @@
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./brandLogos.module.css";
 
 const BrandLogos = ({ logos = [], id }) => {
-  // Duplicamos logos para el loop infinito - solo duplicamos una vez
+  const [isVisible, setIsVisible] = useState(true);
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: "50px" }
+    );
+
+    if (wrapperRef.current) {
+      observer.observe(wrapperRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <div className={styles.brandLogosWrapper} id={id}>
+    <div
+      ref={wrapperRef}
+      className={`${styles.brandLogosWrapper} ${!isVisible ? styles.paused : ""}`}
+      id={id}
+    >
       <div className={styles.brandLogosTrack}>
         {duplicatedLogos.map((logo, index) => (
           <div key={`${logo.alt}-${index}`} className={styles.logoItem}>

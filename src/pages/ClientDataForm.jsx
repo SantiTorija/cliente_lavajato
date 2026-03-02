@@ -50,7 +50,7 @@ const ClientDataForm = () => {
       modelo,
       marca,
       carType,
-      carTypeId
+      carTypeId,
     );
     dispatch(next());
   };

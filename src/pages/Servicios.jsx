@@ -10,17 +10,17 @@ import WhatsappButton from "../components/WhatsappButton";
 import BrandLogos from "../components/BrandLogos";
 
 // Importar logos locales
-import repsol from "../assets/images/logos/repsol.jpg";
-import millard from "../assets/images/logos/bse.jpg";
-import bridgestone from "../assets/images/logos/bridgestone.jpg";
-import winda from "../assets/images/logos/winda.jpg";
-import continental from "../assets/images/logos/contnental.jpg";
-import sancor from "../assets/images/logos/sancor.jpg";
-import sura from "../assets/images/logos/sura.jpg";
-import sanCristobal from "../assets/images/logos/san_cristobal.jpg";
-import surco from "../assets/images/logos/surco.jpg";
-import wurth from "../assets/images/logos/wurth.jpg";
-import hdiSeguros from "../assets/images/logos/hdi-seguros.jpg";
+import repsol from "../assets/images/logos/repsol.png";
+import millard from "../assets/images/logos/bse.png";
+import bridgestone from "../assets/images/logos/bridgestone.png";
+import winda from "../assets/images/logos/winda.png";
+import continental from "../assets/images/logos/continental.png";
+import sancor from "../assets/images/logos/sancor.png";
+import sura from "../assets/images/logos/sura.svg";
+import sanCristobal from "../assets/images/logos/san_cristobal.png";
+import surco from "../assets/images/logos/surco.png";
+import wurth from "../assets/images/logos/wurth.png";
+import hdiSeguros from "../assets/images/logos/hdi-seguros.png";
 
 // Array de logos usando importaciones locales
 const brandLogos = [
@@ -74,7 +74,7 @@ const neumaticosLogos = brandLogos.filter(
   (logo) =>
     logo.alt.toLowerCase().includes("winda") ||
     logo.alt.toLowerCase().includes("bridgestone") ||
-    logo.alt.toLowerCase().includes("continental")
+    logo.alt.toLowerCase().includes("continental"),
 );
 const neumaticosLogosRepetidos = [...neumaticosLogos, ...neumaticosLogos];
 

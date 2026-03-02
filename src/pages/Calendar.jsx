@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import AvailableSlots from "../components/AvailableSlots";
 import useFetchAvailableDays from "../hooks/useFetchAvailability";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Container, Col, Row } from "react-bootstrap";
 import LoaderOverlay from "../components/LoaderOverlay";
 import PropTypes from "prop-types";
@@ -13,27 +13,34 @@ function MyCalendar({ showError = false }) {
   const [date] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [activeDate, setActiveDate] = useState(new Date());
-  const [loading, setLoading] = useState(false);
-
-  const orders = useSelector((state) => state.orders);
+  const [visibleRange, setVisibleRange] = useState({ startDate: null, endDate: null });
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    orders && orders.length > 0;
-  }, []);
+  const visibleDatesRef = useRef(new Set());
+  const prevActiveRef = useRef(null);
 
-  // Fetch availability when month/year changes
+  if (prevActiveRef.current?.getTime() !== activeDate.getTime()) {
+    visibleDatesRef.current.clear();
+    prevActiveRef.current = activeDate;
+  }
+
+  // Recolectar fechas visibles desde tileClassName y obtener rango para el fetch
   const { availableDays, loadingAvailableDays } =
-    useFetchAvailableDays(activeDate);
+    useFetchAvailableDays(visibleRange.startDate, visibleRange.endDate);
+
+  useEffect(() => {
+    const dates = Array.from(visibleDatesRef.current);
+    if (dates.length === 0) return;
+    const sorted = dates.sort();
+    setVisibleRange({ startDate: sorted[0], endDate: sorted[sorted.length - 1] });
+  }, [activeDate]);
 
   // Handle calendar view change
   const handleActiveStartDateChange = (activeStartDate) => {
     setSelectedDay(null);
-    setLoading(true);
     if (activeStartDate) {
       setActiveDate(activeStartDate);
     }
-    setLoading(false);
   };
 
   //chequea si dentro del array availability hay uno con la fecha de ese dia
@@ -42,30 +49,26 @@ function MyCalendar({ showError = false }) {
   };
   //si hay un dia lo encuentra y devuelve si hay slots disponibles
   const findDayAndCheckSlots = (dateStr) => {
-    return (
-      availableDays.find((day) => day.date === dateStr).slots_available.length <
-      4
-    );
+    const day = availableDays.find((day) => day.date === dateStr);
+    if (!day) return false;
+    return day.slots_available.length < 4;
   };
 
   //encuentra los slots del dia, sino devuelve []
   const findDaySlots = (dateStr) => {
-    return availableDays.find((day) => day.date === dateStr)
-      ? availableDays.find((day) => day.date === dateStr).slots_available
-      : [];
+    const day = availableDays.find((day) => day.date === dateStr);
+    return day ? day.slots_available : [];
   };
 
   const isDayFree = (date) => {
-    // Formatear la fecha a 'YYYY-MM-DD' para comparar
     const dateStr = date.toISOString().split("T")[0];
-    // Buscar si existe un registro para esta fecha
     if (availableDays.length === 0) {
       return true;
-    } else if (availableDays.length > 0 && someDayAvailableOnDate(dateStr)) {
-      return findDayAndCheckSlots(dateStr) ? true : false;
-    } else {
-      return true;
     }
+    if (someDayAvailableOnDate(dateStr)) {
+      return findDayAndCheckSlots(dateStr);
+    }
+    return true;
   };
   // Handle day selection
   const handleDateChange = (newDate) => {
@@ -76,6 +79,9 @@ function MyCalendar({ showError = false }) {
   };
 
   const handleTileClassName = (date) => {
+    const dateStr = date.toISOString().split("T")[0];
+    visibleDatesRef.current.add(dateStr);
+
     const classes = [];
 
     if (isDayFree(date)) {
@@ -134,21 +140,17 @@ function MyCalendar({ showError = false }) {
               className="d-flex flex-column align-items-start mb-2 border-white "
             >
               {/* <span>{orders ? `Bienvenido ${orders[0].firstname}` : ""}</span> */}
-              {loading ? (
-                <p>Loading availableDays...</p>
-              ) : (
-                <Calendar
-                  onChange={handleDateChange}
-                  value={date}
-                  onActiveStartDateChange={({ activeStartDate }) =>
-                    handleActiveStartDateChange(activeStartDate)
-                  }
-                  tileClassName={({ date }) => handleTileClassName(date)}
-                  tileDisabled={disableSundays}
-                  minDate={new Date()}
-                  locale="es" // Configura el idioma
-                />
-              )}
+              <Calendar
+                onChange={handleDateChange}
+                value={date}
+                onActiveStartDateChange={({ activeStartDate }) =>
+                  handleActiveStartDateChange(activeStartDate)
+                }
+                tileClassName={({ date }) => handleTileClassName(date)}
+                tileDisabled={disableSundays}
+                minDate={new Date()}
+                locale="es" // Configura el idioma
+              />
               {/* Mensaje de error debajo del calendario */}
               {showError && (
                 <div className="mt-3 text-center w-100">
