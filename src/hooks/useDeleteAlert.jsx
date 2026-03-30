@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch } from "react-redux";
-import { deleteOrder } from "../redux/ordersByStatusSlice";
+import { cancelOrder } from "../redux/ordersByStatusSlice";
 
 const MySwal = withReactContent(Swal);
 const useDeleteAlert = () => {
   const dispatch = useDispatch();
-  const handleDelete = async (orderId, orderDate, orderSlot, setToast) => {
+  const handleDelete = async (orderId, orderDate, orderSlot, email, setToast) => {
     MySwal.fire({
       title: "Atención",
       html: `
@@ -23,7 +23,7 @@ const useDeleteAlert = () => {
       if (result.isConfirmed) {
         try {
           await dispatch(
-            deleteOrder({ orderId, orderDate, orderSlot })
+            cancelOrder({ orderId, orderDate, orderSlot, email })
           ).unwrap();
           setToast({
             show: true,

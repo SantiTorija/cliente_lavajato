@@ -3,8 +3,6 @@ import styles from "./existingReserveModal.module.css";
 import { useState } from "react";
 import useChangeDate from "../hooks/useChangeDate";
 import useIsClient from "../hooks/useFetchIsClient";
-import useDeleteAlert from "../hooks/useDeleteAlert";
-
 function ExistingReserveModal(props) {
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
@@ -13,7 +11,6 @@ function ExistingReserveModal(props) {
 
   const { fetchOrderToEdit } = useChangeDate();
   const { fetchIsClient } = useIsClient();
-  const { handleDelete } = useDeleteAlert();
 
   const handleDateChange = (email) => {
     fetchOrderToEdit(email);

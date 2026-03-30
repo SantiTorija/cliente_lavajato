@@ -13,13 +13,16 @@ export const fetchOrdersByStatus = createAsyncThunk(
   }
 );
 
-export const deleteOrder = createAsyncThunk(
-  "ordersByStatus/deleteOrder",
-  async ({ orderId, orderDate, orderSlot }) => {
-    await axios.delete(
-      `${
-        import.meta.env.VITE_API_URL
-      }/order/${orderId}/${orderDate}/${orderSlot}`
+export const cancelOrder = createAsyncThunk(
+  "ordersByStatus/cancelOrder",
+  async ({ orderId, orderDate, orderSlot, email }) => {
+    await axios.post(
+      `${import.meta.env.VITE_API_URL}/order/${orderId}/cancel`,
+      {
+        email: email.trim(),
+        date: typeof orderDate === "string" ? orderDate.split("T")[0] : orderDate,
+        slot: orderSlot,
+      }
     );
     return orderId;
   }
@@ -48,7 +51,7 @@ const ordersByStatusSlice = createSlice({
         state.error = action.error;
         state.orders = [];
       })
-      .addCase(deleteOrder.fulfilled, (state, action) => {
+      .addCase(cancelOrder.fulfilled, (state, action) => {
         state.orders = state.orders.filter(
           (order) => order.id !== action.payload
         );

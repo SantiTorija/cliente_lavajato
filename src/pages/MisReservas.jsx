@@ -12,6 +12,13 @@ import useEmailValidation from "../hooks/useEmailValidation";
 import { AiOutlineWarning } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
+const ORDER_STATUS_LABELS = {
+  activa: "Activa",
+  completada: "Completada",
+  cancelada: "Cancelada",
+  "faltó_sin_aviso": "Faltó sin aviso",
+};
+
 export default function MisReservas() {
   const [email, setEmail] = useState("");
   const [key, setKey] = useState("Active");
@@ -142,6 +149,9 @@ export default function MisReservas() {
                         style={{ minWidth: 300, maxWidth: 600 }}
                       >
                         <div className="w-100">
+                          <div className="mb-2">
+                            <span className="badge bg-success">Activa</span>
+                          </div>
                           <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex flex-column">
                               <span className={styles.font}>Servicio </span>
@@ -179,6 +189,7 @@ export default function MisReservas() {
                                   order.id,
                                   order.cart.date,
                                   order.cart.slot,
+                                  order.email,
                                   setToast
                                 )
                               }
@@ -215,6 +226,18 @@ export default function MisReservas() {
                         style={{ minWidth: 300, maxWidth: 600 }}
                       >
                         <div className="w-100">
+                          <div className="mb-2">
+                            <span className="badge bg-secondary">
+                              {ORDER_STATUS_LABELS[order.orderStatus] ||
+                                order.orderStatus}
+                            </span>
+                            {order.orderStatus === "activa" && (
+                              <span className="d-block small text-warning mt-1">
+                                Turno con fecha pasada — pendiente de
+                                actualización
+                              </span>
+                            )}
+                          </div>
                           <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex flex-column">
                               <span className={styles.font}>Servicio </span>
@@ -233,31 +256,6 @@ export default function MisReservas() {
                             </strong>
                           </div>
                         </div>
-                        {key === "Active" && (
-                          <div className="d-flex flex-column align-items-end ms-3 gap-2">
-                            <button
-                              className="btn btn-outline-primary btn-sm"
-                              title="Editar"
-                              onClick={() => fetchOrderToEdit(order.id)}
-                            >
-                              <FaEdit />
-                            </button>
-                            <button
-                              className="btn btn-outline-danger btn-sm"
-                              title="Eliminar"
-                              onClick={() =>
-                                handleDelete(
-                                  order.id,
-                                  order.cart.date,
-                                  order.cart.slot,
-                                  setToast
-                                )
-                              }
-                            >
-                              <FaTrash />
-                            </button>
-                          </div>
-                        )}
                       </div>
                     ))}
                   </div>
