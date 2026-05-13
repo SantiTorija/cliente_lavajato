@@ -7,6 +7,7 @@ import CenteredModal from "../components/ExistingReserveModal.jsx";
 import EmailModal from "../components/EmailModal.jsx";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
+import PriceAnnouncementModal from "../components/PriceAnnouncementModal.jsx";
 import { Link } from "react-router-dom";
 import { emptyCart } from "../redux/cartSlice.js";
 import { setStartStep } from "../redux/reserveStepSlice.js";
@@ -24,6 +25,7 @@ function Home() {
 
   return (
     <>
+      <PriceAnnouncementModal />
       <NavbarComponent onReservarClick={() => setEmailModalShow(true)} />
       <Container fluid className={styles.container}>
         <Row className=" px-5 h-100 d-flex flex-column align-items-center justify-content-center text-center">
